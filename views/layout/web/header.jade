@@ -4,46 +4,30 @@ html
       .navbar-inner.navbar-tt
         .container
           .mycontainer
-            a.brand(href='?c=dashboard', title='title') "
+            a.brand(href='?c=dashboard', title=title)
             div
               ul#tt_menu_list.nav
+                li.active
+                  a(href='?c=dashboard',title='Todo')
+                    img(src='images/tt2.menu.todo.png')
                 li
-                  | class="active"
-                  a(href='?c=dashboard')
-                    img(src='src')
-                    | " title="Todo"/
+                  a(href='?c=feed',title=TEAM_FEED )
+                    img(src='images/tt2.menu.feed.png')
                 li
-                  | class="active"
-                  a(href='?c=feed')
-                    img(src='src')
-                    | " title="
-                    | "/
+                  a(href='?c=buddy',title=TEAM_FEED)
+                    img(src='images/tt2.menu.buddy.png')
                 li
-                  | class="active"
-                  a(href='?c=buddy')
-                    img(src='src')
-                    | " title="
-                    | "/
-                li
-                  | class="active "
                   a(href='?c=inbox', title='title')
-                    | "
-                    .inbox
-                      img(src='src')
-                      | " class="reddot" /
+                    .inbox.reddot
+                      img(src='images/reddot.png')
                 li
-                  | class="active"
                   a(href='?c=pluglist')
-                    img(src='src')
-                    | " title="
-                    | "/
+                    img(src='images/tt2.menu.plugin.png')
                 li.visible-phone
                   a(href='?c=guest&a=logout', title='title')
-                    | "
-                    img(src='src')
-                    | " /
+                    img(src='images/tt2.menu.logout.png')
                 li#doing_gif
-                  img(src='src')
+                  img(src='images/doing.gif')
                   | "/
             // /.nav-collapse
             #top_dropdown.btn-group.pull-right.nav-collapse

@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('layout/web/default', { title: 'Express', TEAM_FEED:'my' });
 };

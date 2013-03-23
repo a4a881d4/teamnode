@@ -162,7 +162,7 @@ a.white
 
 html,body
 {
-	background: url(../image/tt2.board.bg.png) repeat #F1F1F1;
+	background: url(../images/tt2.board.bg.png) repeat #F1F1F1;
 	font-family: 'Helvetica Neue', 'Hiragino Sans GB', 'Segoe UI', 'Microsoft Yahei', '微软雅黑', 'Tahoma', 'Arial', 'STHeiti', 'sans-serif';
 }
 
@@ -178,7 +178,7 @@ h1,h2,h3,h4,h5,h6
 
 .navbar-tt
 {
-	background: url(../image/tt2bg.png) repeat;
+	background: url(../images/tt2bg.png) repeat;
 }
 
 div.mycontainer
@@ -201,7 +201,7 @@ div.container
 	text-shadow:black 0px 1px 0px!important;
 	width:100px;
 	height:24px;
-	background: url(../image/tt2.flogo.png) no-repeat 50% 50% ;
+	background: url(../images/tt2.flogo.png) no-repeat 50% 50% ;
 }
 
 .navbar .nav  .active  a
@@ -380,22 +380,22 @@ ul#todo_list_normal li,ul#todo_list_done li
 
 ul#todo_list_done li.blue
 {
-	background: url( ../image/tt2.check.blue.small.png ) 12px 12px no-repeat #f7f8f8;
+	background: url( ../images/tt2.check.blue.small.png ) 12px 12px no-repeat #f7f8f8;
 }
 
 ul#todo_list_done li.red
 {
-	background: url( ../image/tt2.check.red.small.png ) 12px 12px no-repeat #f7f8f8;
+	background: url( ../images/tt2.check.red.small.png ) 12px 12px no-repeat #f7f8f8;
 }
 
 ul#todo_list_follow li
 {
-	background: url( ../image/tt2.listen.blue.small.png ) 12px 12px no-repeat white;
+	background: url( ../images/tt2.listen.blue.small.png ) 12px 12px no-repeat white;
 }
 
 ul#todo_list_follow li.nofollow
 {
-	background: url( ../image/tt2.listen.gray.small.png ) 12px 12px no-repeat white;
+	background: url( ../images/tt2.listen.gray.small.png ) 12px 12px no-repeat white;
 }
 
 ul#todo_list_follow li.finished a
@@ -509,7 +509,7 @@ ul#todo_list_star li.blue,ul#todo_list_star li.yellow
 
 ul#todo_list_star li,ul#todo_list_normal li
 {
-	background: url( ../image/tt2.check.gray.small.png ) 12px 12px no-repeat white;
+	background: url( ../images/tt2.check.gray.small.png ) 12px 12px no-repeat white;
 }
 
 
@@ -521,10 +521,10 @@ ul#todo_list_star li.red .todo_row,ul#todo_list_normal li.red .todo_row
 
 ul#todo_list_star li.red.ing .todo_row,ul#todo_list_normal li.red.ing .todo_row
 {
-	border-image:url(../image/tt2.bg.red.ing.gif) 5;
-	-moz-border-image:url(../image/tt2.bg.red.ing.gif) 5;
-	-webkit-border-image:url(../image/tt2.bg.red.ing.gif) 5;
-	-o-border-image:url(../image/tt2.bg.red.ing.gif) 5;
+	border-image:url(../images/tt2.bg.red.ing.gif) 5;
+	-moz-border-image:url(../images/tt2.bg.red.ing.gif) 5;
+	-webkit-border-image:url(../images/tt2.bg.red.ing.gif) 5;
+	-o-border-image:url(../images/tt2.bg.red.ing.gif) 5;
 	border-left:5px solid transparent;
 	border-top:0px;
 	border-right:0px;
@@ -542,10 +542,10 @@ ul#todo_list_star li.blue .todo_row, ul#todo_list_normal li.blue .todo_row,ul#to
 
 ul#todo_list_star li.blue.ing .todo_row,ul#todo_list_normal li.blue.ing .todo_row
 {
-	border-image:url(../image/tt2.bg.blue.ing.gif) 5;
-	-moz-border-image:url(../image/tt2.bg.blue.ing.gif) 5;
-	-webkit-border-image:url(../image/tt2.bg.blue.ing.gif) 5;
-	-o-border-image:url(../image/tt2.bg.blue.ing.gif) 5;
+	border-image:url(../images/tt2.bg.blue.ing.gif) 5;
+	-moz-border-image:url(../images/tt2.bg.blue.ing.gif) 5;
+	-webkit-border-image:url(../images/tt2.bg.blue.ing.gif) 5;
+	-o-border-image:url(../images/tt2.bg.blue.ing.gif) 5;
 	border-left:5px solid transparent;
 	border-top:0px;
 	border-right:0px;
@@ -555,19 +555,19 @@ ul#todo_list_star li.blue.ing .todo_row,ul#todo_list_normal li.blue.ing .todo_ro
 
 ul#todo_list_star li.blue .todo_fav
 {
-	background: url( ../image/tt2.flag.blue.small.png ) 12px 12px no-repeat ;
+	background: url( ../images/tt2.flag.blue.small.png ) 12px 12px no-repeat ;
 	background-position: 98% 0%;
 }
 
 ul#todo_list_star li.red .todo_fav
 {
-	background: url( ../image/tt2.flag.red.small.png ) 12px 12px no-repeat  ;
+	background: url( ../images/tt2.flag.red.small.png ) 12px 12px no-repeat  ;
 	background-position: 98% 0% ;
 }
 
 ul#todo_list_normal li .todo_fav
 {
-	background: url( ../image/tt2.flag.gray.small.png ) 24px 24px no-repeat ;
+	background: url( ../images/tt2.flag.gray.small.png ) 24px 24px no-repeat ;
 	background-position: 98% 0% ; 
 }
 
@@ -644,38 +644,38 @@ ul.gbox li a
 
 ul.gbox li.nofollow
 {
-	background: url( ../image/tt2.listen.gray.small.png ) no-repeat ;
+	background: url( ../images/tt2.listen.gray.small.png ) no-repeat ;
 }
 
 ul.gbox li.follow
 {
-	background: url( ../image/tt2.listen.blue.small.png ) no-repeat ;
+	background: url( ../images/tt2.listen.blue.small.png ) no-repeat ;
 }
 
 ul.gbox li.done
 {
-	background: url( ../image/tt2.check.blue.small.png ) no-repeat ;
+	background: url( ../images/tt2.check.blue.small.png ) no-repeat ;
 }
 
 ul.gbox li.notdone
 {
-	background: url( ../image/tt2.check.gray.small.png ) no-repeat ;
+	background: url( ../images/tt2.check.gray.small.png ) no-repeat ;
 }
 
 
 ul.gbox li.nostar
 {
-	background: url( ../image/tt2.star.gray.small.png ) no-repeat ;
+	background: url( ../images/tt2.star.gray.small.png ) no-repeat ;
 }
 
 ul.gbox li.star.public
 {
-	background: url( ../image/tt2.star.blue.small.png ) no-repeat ;
+	background: url( ../images/tt2.star.blue.small.png ) no-repeat ;
 }
 
 ul.gbox li.star.private
 {
-	background: url( ../image/tt2.star.red.small.png ) no-repeat ;
+	background: url( ../images/tt2.star.red.small.png ) no-repeat ;
 }
 
 /*
@@ -699,17 +699,17 @@ ul.gbox li.star:hover
 
 ul.gbox li.forward
 {
-	background: url( ../image/tt2.buddy.gray.small.png ) no-repeat ;
+	background: url( ../images/tt2.buddy.gray.small.png ) no-repeat ;
 }
 
 ul.gbox li.forward:hover
 {
-	background: url( ../image/tt2.buddy.blue.small.png ) no-repeat ;	
+	background: url( ../images/tt2.buddy.blue.small.png ) no-repeat ;	
 }
 
 ul.gbox li.private
 {
-	background: url( ../image/tt2.lock.red.small.png ) no-repeat ;
+	background: url( ../images/tt2.lock.red.small.png ) no-repeat ;
 }
 
 /*
@@ -721,7 +721,7 @@ ul.gbox li.private:hover
 
 ul.gbox li.public
 {
-	background: url( ../image/tt2.lock.gray.small.png ) no-repeat ;
+	background: url( ../images/tt2.lock.gray.small.png ) no-repeat ;
 }
 
 /*
@@ -743,7 +743,7 @@ ul.gbox li.star.public:hover
 
 ul.gbox li.owner
 {
-	background: url( ../image/tt2.buddy.blue.small.png ) no-repeat ;
+	background: url( ../images/tt2.buddy.blue.small.png ) no-repeat ;
 }
 
 .ppfliter
@@ -926,13 +926,13 @@ ul#feed_list li.cast
 	box-shadow: 0px 1px 1px  rgba( 0 , 0 , 0 , 0.4 );
 	-webkit-box-shadow: 0px 1px 1px  rgba( 0 , 0 , 0 , 0.4 );
 	-moz-box-shadow: 0px 1px 1px  rgba( 0 , 0 , 0 , 0.4 );
-	background: url( ../image/tt2.quote.small.gray.png ) no-repeat white ;
+	background: url( ../images/tt2.quote.small.gray.png ) no-repeat white ;
 	background-position: 3% 0%;
 }
 
 .fd_cast_title
 {
-	background: url( ../image/tt2.quote.small.gray.png ) no-repeat white ;
+	background: url( ../images/tt2.quote.small.gray.png ) no-repeat white ;
 	background-position: 0% 0px;
 	margin-bottom: 10px;
 	padding-top:20px;
@@ -1167,7 +1167,7 @@ ul.settings_icon li:last-child
 
 #tt_menu_list li div.inbox
 {
-	background:url( ../image/tt2.menu.inbox.png ) no-repeat ; 
+	background:url( ../images/tt2.menu.inbox.png ) no-repeat ; 
 }
 
 img.reddot
@@ -1417,7 +1417,7 @@ div.upgrade a.btn
 	height:20px;
 	padding-right:5px;
 	text-align: right;
-	background: url(../image/tt2bg.png) repeat;
+	background: url(../images/tt2bg.png) repeat;
 }
 
 #im_box_header a
@@ -1462,7 +1462,7 @@ div.upgrade a.btn
 	height:20px;
 	padding-right:5px;
 	text-align: right;
-	background: url(../image/tt2bg.png) repeat;
+	background: url(../images/tt2bg.png) repeat;
 	cursor: pointer;
 }
 
@@ -1834,7 +1834,7 @@ div.tagsinput div { display:block; float: left; }
 		display: block;
 		width:60px;
 		height:24px;
-		background: url(../image/mlogo.png) no-repeat 50% ;
+		background: url(../images/mlogo.png) no-repeat 50% ;
 	}
 }
 
