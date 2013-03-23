@@ -1,0 +1,35 @@
+html
+  body
+    .row-fluid
+      .span12
+        h2.main_board
+          a.side_link.pull-right(href='https://github.com/easychen/TeamToy-Plugins', target='_blank') 更多插件
+          | 插件管理
+          a.side_link(href='javascript:show_float_box("上传插件" , "?c=pluglist&a=upload");void(0);') 上传插件
+        table.table.table-hover.table-plugin
+          thead
+            tr
+              th(width='100') 名称
+              th(width='40') 版本
+              th 简介
+              th(width='60') 状态
+              tr
+          tbody
+            tr
+              td
+              td.tcenter
+              td
+                | - by
+                a(href='href', mailto:='mailto:') " target="_blank"
+              td
+                label.checkbox
+                  input(type='checkbox', onclick='onclick')
+                  | ' , '
+                  | ' , this )" checked="true"/
+                  | 启用
+                label.checkbox
+                  input(type='checkbox', onclick='onclick')
+                  | ' , '
+                  | ' , this )"/
+                  | 启用
+        div 没有发现可用的插件

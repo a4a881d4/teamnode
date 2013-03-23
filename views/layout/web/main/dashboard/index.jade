@@ -1,0 +1,41 @@
+html
+  body
+    .row-fluid
+      .span7
+        // dropdown menu
+        .btn-group.card-title
+          a.dropdown-toggle(data-toggle='dropdown', href='#')
+            span.caret
+          ul#todo_tab_menu.dropdown-menu
+            // dropdown menu links
+            li
+              a(tabindex='-1', href='?c=dashboard&a=index')
+            li
+              a(tabindex='-1', href='?c=dashboard&a=index&type=follow')
+          a.side_link(href='javascript:todo_all_done();')
+        #todo_follow
+          ul#todo_list_follow
+        #todo_mine
+          ul#todo_list_star
+          ul#todo_list_normal
+          p.dtitle
+            img(src='src')
+            | " /
+          ul#todo_list_done
+          a.side_link(href='javascript:todo_clean();')
+        script
+          function loaded()
+          {
+          remember();
+          <?php if( $follow ): ?>
+          load_todo('follow');
+          <?php else: ?>
+          load_todo('star');
+          load_todo('normal');
+          load_todo('done');
+          <?php endif; ?>
+          <?php do_action( 'UI_DASHBOARD_TODO_SCRIPT_LOAD' ); ?>
+          }
+          document.addEventListener('DOMContentLoaded', loaded, false);
+          <?php do_action( 'UI_DASHBOARD_TODO_SCRIPT_LAST' ); ?>
+      #side_board.span5

@@ -1,0 +1,81 @@
+html
+  body
+    table.table.table-hover.table-install
+      thead
+        tr
+          th(width='100') 检查项
+          th(width='100') 建议值
+          th(width='100') 当前值
+          th(width='200') 可能导致的问题
+          th 如何调整
+          tr
+      tbody
+        tr
+        tr
+          td 目录是否可写
+          td 是
+          td
+            | 根目录 -
+            br
+            | 头像目录 -
+            br
+            | 插件目录 -
+          td.ierror 在线升级、上传插件、上传头像等功能不可用
+          td.ierror 修改目录属性为755;SAE环境请手工开启Storage服务，并建立名为upload的puglic domain
+        tr
+          td GD库
+          td -
+          td
+          td.ierror 上传头像等功能不可用
+          td.ierror 修改php.ini，安装gd2扩展库
+        tr
+          td CURL库
+          td -
+          td
+          td.ierror 无法正常登入、无法在线升级
+          td.ierror 修改php.ini，安装curl扩展库
+        tr
+          td 时区
+          td
+            br
+          td
+          td.ierror 评论、广播的相对时间显示错误
+          td.ierror 修改php.ini，设置date.timezone选项
+        tr
+          td API接口路径
+          td
+          td
+          td.ierror 无法登入，提示用户名、密码错误
+          td.ierror
+            | 如果你将TeamToy安装到了子目录，请将config/app.config.sample.php 改名为 config/app.config.php，并根据自己的情况修改site_url值
+        tr
+          td TeamToy云端
+          td -
+          td
+            | 和TeamToy升级服务器通讯不能
+            | 可用
+          td.ierror 在线升级不可用
+          td.ierror 修改php.ini，打开URL file-access选项
+        tr
+          td TeamToy版本
+          td 最新版 
+          td
+            | 当前版本
+          td.ierror 旧版本可能存在部分已知BUG
+          td.ierror 重新下载最新代码或者安装完成后在线升级至最新
+        tr
+          td 数据库配置
+          td -
+          td
+          td.ierror 登入不能，页面出现各种错
+          td.ierror 请将config/db.config.sample.php改名为config/db.config.php 并将里边的数据库信息修改为空间对应的配置
+    div
+      a#guide_btn.btn.btn-success(href='http://ftqq.com/2013/01/teamtoy-manual/', target='_blank') 完全使用手册
+      a#install_btn.btn.btn-primary(href='?c=install&do=1') 继续安装
+    script(type='text/javascript')
+      if( $('.table-install tr.bad').length == 0 )
+      {
+      $('.table-install').hide();
+      $('#guide_btn').hide();
+      $('#install_btn').html('检测环境OK，开始安装');
+      }

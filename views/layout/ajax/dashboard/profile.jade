@@ -1,0 +1,48 @@
+html
+  body
+    form#profile_form(action='?c=dashboard&a=update_profile')
+      .input-prepend.full
+        span.add-on
+          i.icon-user
+        input(type='text', name='name', placeholder='placeholder')
+        | " value="
+        | " readOnly="true"
+      .input-prepend.full
+        span.add-on
+          i.icon-envelope
+        input(type='text', name='email', placeholder='placeholder')
+        | " value="
+        | "
+      .input-prepend.full
+        span.add-on
+          i.icon-phone
+        input(type='text', name='mobile', placeholder='placeholder')
+        | " value="
+        | "
+      .input-prepend.full
+        span.add-on
+          i.icon-phone
+        input(type='text', name='tel', placeholder='placeholder')
+        | " value="
+        | "
+      .input-prepend.full
+        span.add-on
+          i.icon-credit-card
+        input(type='text', name='eid', placeholder='placeholder')
+        | " value="
+        | "
+      .input-prepend.full
+        span.add-on
+          i.icon-twitter
+        input(type='text', name='weibo', placeholder='placeholder')
+        | " value="
+        | "
+      .input-prepend.full
+        span.add-on
+          i.icon-asterisk
+        input(type='text', name='desp', placeholder='placeholder')
+        | " value="
+        | "
+      .line
+      div
+        button.btn(type='button', onclick='send_form( "profile_form" , function(data){ profile_updated( data ); } )')

@@ -1,0 +1,28 @@
+html
+  body
+    .row-fluid
+      .span7
+        h2.main_board 团队动态
+        ul#feed_list
+        script
+          function loaded()
+          {
+          remember();
+          load_feed();
+          cast_at_check();
+          <?php do_action( 'UI_FEED_SCRIPT_LOAD' ); ?>
+          }
+          document.addEventListener('DOMContentLoaded', loaded, false);
+          <?php do_action( 'UI_FEED_SCRIPT_LAST' ); ?>
+      #side_board.span5
+        #cast_box
+          #side_container
+            h2.side_board
+              | 发起广播
+              a#cast_user_tips.side_link(href='#') 所有人都会收到通知
+            form#cast_form(action='javascript:cast_send($("#cast_text").val());void(0);')
+              textarea#cast_text.full(rows='3', name='text', placeholder='如果你只想特定的人收到通知，可以使用@ 进行点名；未进行点名的广播将发送给所有人')
+              div
+                a.side_link(href='javascript:at_chooser();void(0);') @点名
+                button.btn.pull-right(type='submit', disabled='disabled') 发送
+                // <a href="#" class="gray_link">添加更多描述</a>

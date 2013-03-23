@@ -1,0 +1,49 @@
+html
+  body
+    ul.gbox
+      li.follow
+        a(href='javascript:void(0);') 关注
+      li.nofollow
+        a(href='javascript:void(0);') 关注
+      li.done
+        a(href='javascript:void(0);') 完成
+      li.notdone
+        a(href='javascript:void(0);') 完成
+      li.owner
+        a.namecard(href='javascript:void(0);', uid='uid') "
+      li.forward
+        a(href='href')
+          | ','?c=dashboard&a=people_box&jsfunc=todo_assign&tid=
+          | ');"
+          | 转让
+      li.public
+        a(href='javascript:void(0);') 私密
+      li.private
+        a(href='javascript:void(0);') 私密
+      li.star.public
+        a(href='javascript:void(0);') 星标
+      li.star.private
+        a(href='javascript:void(0);') 星标
+      li.nostar.pub
+        a(href='javascript:void(0);') 星标
+      li.nostar.pri
+        a(href='javascript:void(0);') 星标
+    script
+      bind_gbox( '<?=$data['tid']?>' );
+    .line
+    h2.side_board 谁在关注
+    ul.follower
+      li
+        img(src='src')
+        | " title="
+        | " /
+    .line
+    h2.side_board 讨论
+    .comment_box
+      form.form-inline(action='action')
+        | , $('#comment_text').val() );void(0);" method="post" id="comment_form"
+        .input-append
+          input#comment_text.side_board_input(type='text', placeholder='请输入评论内容')
+          button.btn(type='submit') 发布
+    .line
+    ul#todo_history.history

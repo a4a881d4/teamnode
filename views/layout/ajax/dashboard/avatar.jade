@@ -1,0 +1,44 @@
+html
+  body
+    form(action='?c=dashboard&a=update_avatar', method='post', enctype='multipart/form-data')
+      div
+        button.btn.btn-primary.pull-right(type='submit')
+        input#ufile(type='file', onchange='do_crop();void(0);', name='ufile')
+      .line-large
+      div
+        img#uavatar.hide
+        .hide
+          input(type='text', name='x')
+          input(type='text', name='y')
+          input(type='text', name='h')
+          input(type='text', name='w')
+    script(type='text/javascript')
+      var jcrop_ref = null ;
+      function do_crop()
+      {
+      get_img_src( $('#ufile')[0] , function( src )
+      {
+      $('#uavatar').attr('src',src).load(function()
+      {
+      var rwidth = this.width;
+      var rheight = this.height;
+      $('#uavatar').show();
+      if( jcrop_ref == null )
+      jcrop_ref = $('#uavatar').Jcrop
+      ({
+      setSelect:   [ 0, 0, 100, 100 ],
+      boxWidth: 200, boxHeight: 200,
+      trueSize: [rwidth,rheight],
+      aspectRatio: 1,
+      onSelect: updateCoords
+      });
+      });
+      });
+      }
+      function updateCoords(c)
+      {
+      $('input[name=x]').val(c.x);
+      $('input[name=y]').val(c.y);
+      $('input[name=w]').val(c.w);
+      $('input[name=h]').val(c.h);
+      }

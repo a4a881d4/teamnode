@@ -1,0 +1,16 @@
+html
+  body
+    .p20
+      a.close.pull-right(href='javascript:tdboard_close();', title='title')
+        | "
+        | −
+      h2.side_board.side_long(title='title') "
+      #todo_title_online_edit
+        a.close.pull-right(href='javascript:tdboard_close();', title='title')
+          | "
+          | −
+        h2.side_board.side_long.inline_edit(title='title')
+          | -
+          | " onclick="$('#todo_title_online_edit').load('?c=dashboard&a=todo_edit&tid=
+          | &text=
+          | ')"

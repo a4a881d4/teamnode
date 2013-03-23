@@ -1,0 +1,50 @@
+html
+  body
+    #im
+      #im_header
+        a#im_swith(href='javascript:void(0);') −
+      #im_search.input-prepend
+        span.add-on
+          i.icon-search
+        input#imkeyword(type='text', placeholder='姓名或拼音')
+      ul#im_buddy_list
+    #im_box
+      #im_box_header
+        a#im_box_closer(href='javascript:close_im_box();void(0);') ×
+      ul#im_area_list
+    // float box
+    #float_box.modal.hide.fade
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h3#float_box_title 正在载入
+      .modal-body
+    // / float box
+    // to top
+    #to_top
+      i.icon-arrow-up
+      | Top
+    // /to top button
+    audio#ttsoundplayer(preload='auto')
+      source(src='static/sound/dididi.wav', type='audio/wav')
+    script
+      $(function() {
+      $(window).scroll(function() {
+      if($(this).scrollTop() != 0) {
+      $('#to_top').fadeIn();
+      } else {
+      $('#to_top').fadeOut();
+      }
+      });
+      $('#to_top').click(function() {
+      $('body,html').animate({scrollTop:0},100);
+      });
+      });
+      setTimeout( check_notice , 2000 );
+      setInterval( check_notice , 100000 );
+      setTimeout( check_online , 1000 );
+      setInterval( check_online , 100000 );
+      <?php do_action( 'UI_COMMON_SCRIPT' ); ?>
+      var site_url = '<?=c('site_url')?>';
+      var favicon = site_url + '/<?=c('favicon')?>';
+      var current_user = '<?=uname()?>';
+      load_im_buddy_list();

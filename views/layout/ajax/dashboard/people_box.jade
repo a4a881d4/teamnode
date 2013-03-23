@@ -1,0 +1,98 @@
+html
+  body
+    | 15 ): ?
+    .ppfliter.inline-form
+      .input-prepend
+        span.add-on
+          i.icon-search
+        input#ppkeyword(type='text', placeholder='placeholder')
+        | "
+      span#ppuname_selected
+    ul.pplist
+      // choose multi user
+      li.multi.user(uid='uid')
+        | " uname="
+        | " pinyin="
+        | "
+        a(href='#')
+          img(src='src')
+          | "
+          br
+      // choose single user
+      li.user(uid='uid')
+        | " uname="
+        | " pinyin="
+        | "
+        a(href='#')
+          img(src='src')
+          | "
+          br
+      li.user(uid='uid')
+        | " uname="
+        | " pinyin="
+        | "
+        a(href='href', javascript:='javascript:')
+          | (
+          | ,
+          | , '
+          | ');"
+          img(src='src')
+          | "
+          br
+      // . end foreach
+    .modal-footer.mywhite
+      a#pp_multi_ok_btn.btn.btn-primary(href='#')
+    script(type='text/javascript')
+      $('.pplist .multi').unbind( 'click');
+      $('.pplist .multi').bind( 'click' , function()
+      {
+      $(this).toggleClass('pp-selected');
+      $("#ppuname_selected").empty();
+      if( $('.pplist .multi.pp-selected').size() > 0 )
+      {
+      $("#ppuname_selected").html('<?=__('SELECTED_PEOPLE')?> - ');
+      $('.pplist .multi.pp-selected').each( function()
+      {
+      $("#ppuname_selected").append( $('<span class="nameitem" uid="' + $(this).attr('uid') + '"><i class="icon-user"></i>'+ $(this).attr('uname') +'</span> &nbsp;') );
+      });
+      }
+      });
+      $('#pp_multi_ok_btn').unbind( 'click' );
+      $('#pp_multi_ok_btn').bind( 'click' , function()
+      {
+      if( $('.pp-selected').size() < 1 )
+      {
+      alert('<?=__('ONE_PEOPLE_LEAST')?>');
+      return false;
+      }
+      var uids = [] , unames = [];
+      $('.pp-selected').each( function()
+      {
+      uids.push( $(this).attr('uid') );
+      unames.push( $(this).attr('uname') );
+      });
+      <?=z(t(v('jsfunc')))?>(uids , unames);
+      });
+    script(type='text/javascript')
+      $('#ppkeyword').unbind('keyup keydown');
+      $('#ppkeyword').bind('keyup keydown' ,function()
+      {
+      if( $('#ppkeyword').val() != '' )
+      {
+      $('.pplist li.user').each(function()
+      {
+      if( ($(this).attr('pinyin').indexOf( $('#ppkeyword').val() ) < 0)
+      && ( $(this).attr('uname').indexOf( $('#ppkeyword').val() ) < 0 ))
+      $(this).css('display','none');
+      else
+      $(this).css('display','inline-block');
+      });
+      }
+      else
+      {
+      $('.pplist li.user').each(function()
+      {
+      $(this).css('display','inline-block');
+      });
+      }
+      });

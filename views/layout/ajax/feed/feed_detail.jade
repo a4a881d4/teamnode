@@ -1,0 +1,14 @@
+html
+  body
+    .p20
+      a.close.pull-right(href='javascript:fdboard_close();', title='收起动态详情') −
+      .fd_cast_title.side_long(title='title')
+        | "
+      .comment_box
+        form.form-inline(action='action')
+          | ' ,  $('#fcomment_text').val() );void(0);" method="post" id="fcomment_form"
+          .input-append
+            input#fcomment_text.side_board_input(type='text', placeholder='请输入评论内容')
+            button.btn(type='submit') 发布
+      .line
+      ul#feed_comment.fcomment

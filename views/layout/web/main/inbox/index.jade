@@ -1,0 +1,51 @@
+html
+  body
+    .row-fluid
+      .span7
+        h2.main_board 收件箱
+        ul#notice_list
+        script
+          function loaded()
+          {
+          remember();
+          load_inbox();
+          $('.settings_icon').tooltip('show');
+          if( !window.webkitNotifications )
+          $('#desknoty_li').hide();
+          else
+          {
+          if( window.webkitNotifications.checkPermission() == 0 )
+          $('#desknoty_li').css('background-color','#999');
+          else
+          $('#desknoty_link').bind('click',function(callback)
+          {
+          window.webkitNotifications.requestPermission(callback);
+          });
+          }
+          <?php do_action( 'UI_INBOX_SCRIPT_LOAD' ); ?>
+          }
+          <?php do_action( 'UI_INBOX_SCRIPT_LAST' ); ?>
+          document.addEventListener('DOMContentLoaded', loaded, false);
+      #side_board.span5
+        #nsettings_box
+          #side_container
+            h2.side_board 消息推送设置
+            ul#n1.settings_icon
+              li#desknoty_li
+                a#desknoty_link(href='javascript:void(0);', title='桌面通知')
+                  img(src='src')
+                  | "/
+              //
+                			<li><a href="#" title="短信通知" rel="tooltip"><img src="<?=image('settings.btn.mobile.png')?>"/></a></li>
+                		
+            .line-large
+            h2.side_board 通过手机客户端接收通知
+            ul.settings_icon.client
+              li
+                a(href='javascript:show_float_box( "使用Android客户端登入" , "?c=inbox&a=client&type=android" );void(0);', target='_blank', title='Android', rel='tooltip')
+                  img(src='src')
+                  | "/
+              li
+                a(href='javascript:show_float_box( "使用iOS客户端登入" , "?c=inbox&a=client&type=ios" );void(0);', target='_blank', title='iOS', rel='tooltip')
+                  img(src='src')
+                  | "/

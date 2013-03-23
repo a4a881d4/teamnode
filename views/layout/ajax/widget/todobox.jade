@@ -1,0 +1,35 @@
+html
+  body
+    #todo_box
+      #side_container
+        h2.side_board 添加TODO
+        form#todo_form.form-horizontal(action='javascript:todo_add($("#todo_form [name=content]").val() , $("#todo_form [name=private]:checked").val() ,  $("#todo_form [name=star]:checked").val() , $("#todo_assign_uid").val());void(0);', method='post')
+          div
+            input#todo_add_content.full.tt(type='text', name='content', placeholder='请输入TODO内容')
+          .line
+          #todo_more_option.hide.form-inline
+            label.checkbox
+              input.remember(type='checkbox', name='private', value='1')
+              | 仅自己可见
+            label.checkbox
+              input.remember(type='checkbox', name='star', value='1')
+              | 加星
+            span#assign_chooser_span.pull-right
+              a(href='javascript:assign_chooser();void(0)')
+                | 给
+                i.icon-user
+            input#todo_assign_uid(type='hidden', name='uid', value='0')
+          div
+            // <a href="#" class="gray_link">添加更多描述</a>
+            a(href='href')
+              | /?a=promo" target="_blank"
+              img(src='src')
+              | /?a=promo_img&date=
+              | " onError="$(this).hide();void(0);" /
+            button.btn.pull-right(type='submit') 保存
+    script(type='text/javascript')
+      $('#todo_add_content').bind( 'focus' , function()
+      {
+      $('#todo_more_option').slideDown();
+      });
+      <?php do_action( 'UI_TODOBOX_SCRIPT_LAST' ); ?>

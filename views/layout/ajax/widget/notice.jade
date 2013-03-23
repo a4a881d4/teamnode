@@ -1,0 +1,42 @@
+html
+  body
+    li.class(todo='todo')
+      | " tid="
+      | " id="nid-
+      | "
+      div
+        span.time
+        | 0 ): ?
+        a.pull-right.ccount(href='javascript:void(0);')
+          | 评论(
+          span.cnt
+          | )
+    li.class(cast='cast')
+      | " fid="
+      | " id="nid-
+      | "
+      div
+        span.time
+        | 0 ): ?
+        a.pull-right.ccount(href='javascript:void(0);')
+          | 评论(
+          span.cnt
+          | )
+    li.class(upgrade='upgrade')
+      | "  id="nid-
+      | "
+      .upgrade
+        br
+        a.btn.btn-primary(href='?c=dashboard&a=upgrade', target='_blank') 立刻升级
+      div
+        span.time
+    li.class(normal='normal')
+      | "  id="nid-
+      | "
+      div
+        span.time
+        | 0 ): ?
+        a.pull-right.ccount(href='javascript:void(0);')
+          | 评论(
+          span.cnt
+          | )

@@ -1,0 +1,25 @@
+html
+  body
+    .row-fluid
+      .span7
+        // dropdown menu
+        .btn-group.card-title
+          a.dropdown-toggle(data-toggle='dropdown', href='#')
+            span.caret
+          ul#todo_tab_menu.dropdown-menu
+            // dropdown menu links
+            li
+              a(tabindex='-1', href='?c=dashboard&a=index')
+            li
+              a(tabindex='-1', href='?c=dashboard&a=follow')
+        #todo_follow
+          // my todo list
+          ul#todo_list_follow
+        script
+          function loaded()
+          {
+          remember();
+          load_todo('follow');
+          }
+          document.addEventListener('DOMContentLoaded', loaded, false);
+      #side_board.span5

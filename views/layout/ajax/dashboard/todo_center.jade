@@ -1,0 +1,7 @@
+html
+  body
+    h2.side_board(title='title') "
+    script(type='text/javascript')
+      bind_gbox(<?=$data['id']?>,<?=intval($data['details']['is_public'])?>);
+      namecard();
+      enable_at('comment_text');
