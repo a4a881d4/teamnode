@@ -14,3 +14,10 @@ exports.index = function(req, res){
   	layout:'web' 
   	});
 };
+
+exports.guest = function(req, res){
+  res.render('guest', { 
+  	title: 'Guest', 
+  	layout:'fullwidth' 
+  	});
+};
