@@ -1,5 +1,26 @@
-extends layout
+#header
+  .navbar.navbar-fixed-top
+    .navbar-inner.navbar-tt
+      .container
+        .mycontainer
+          a.brand(href='?c=dashboard', title=title)
+          div
+            ul#tt_menu_list.nav
+              !=partial('tt_menu', {as:'ttMenu',collection:menulist} )
+          #top_dropdown.btn-group.pull-right.nav-collapse
+            button#top_user_name.btn.noblue(data-toggle='dropdown')
+            button#top_user_menu.btn.dropdown-toggle(data-toggle='dropdown')
+              span.caret
+            ul.dropdown-menu
+              li#user_menu_1.divider
+              li#user_menu_2.divider
+              li#user_menu_3.divider
+              li#user_menu_4.divider
 
-block content
-  h1= title
-  p Welcome to #{title}
+
+#content
+  .container
+    .row-fluid
+      .span3
+      .span9
+    

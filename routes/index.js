@@ -4,5 +4,13 @@
  */
 
 exports.index = function(req, res){
-  res.render('layout/web/default', { title: 'Express', TEAM_FEED:'my' });
+	menulist=[{href:'?c=dashboard',title:'Todo',img:'images/tt2.menu.todo.png'},
+						{href:'?c=feed',title:'feed',img:'images/tt2.menu.feed.png'},
+						{href:'?c=buddy',title:'buddy',img:'images/tt2.menu.buddy.png'}
+					];
+  res.render('index', { 
+  	title: 'Express', 
+  	menulist:menulist,
+  	layout:'web' 
+  	});
 };
