@@ -9,6 +9,8 @@
     "express": "3.1.0",
     "jade": "*",
     "consolidate": "*",
-    "express-partials": "*"
+    "express-partials": "*",
+    "connect-mongo": "*",
+    "mongodb": "*"
   }
 }
