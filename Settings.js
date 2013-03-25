@@ -48,6 +48,10 @@ var render = function render( str ) {
   return fn;
 };
 
+var jsforword = function jsforword( url ) {
+  return '<script>location="' +url+ '"</script>';
+};
+
 module.exports = {
   cookieSecret: 'a4a881d4@163.com',
   db: 'teamnode',
@@ -56,5 +60,6 @@ module.exports = {
   web:web,
   errorCode:errorCode,
   is_email:is_email,
-  render:render
+  render:render,
+  jsforword:jsforword
 };

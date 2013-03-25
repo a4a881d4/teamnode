@@ -92,9 +92,9 @@ User.getBy = function getBy( some, callback ) {
         mongodb.close();
         if (doc) {
           var user = new User(doc);
-          callback(err, user);
+          callback(null, user);
         } else {
-          callback(err, null);
+          callback('error', null);
         }
       });
     });
