@@ -1,59 +1,18 @@
-html
-  body
-    .navbar.navbar-fixed-top
-      .navbar-inner.navbar-tt
-        .container
-          .mycontainer
-            a.brand(href='?c=dashboard', title=title)
-            div
-              ul#tt_menu_list.nav
-                li.active
-                  a(href='?c=dashboard',title='Todo')
-                    img(src='images/tt2.menu.todo.png')
-                li
-                  a(href='?c=feed',title=TEAM_FEED )
-                    img(src='images/tt2.menu.feed.png')
-                li
-                  a(href='?c=buddy',title=TEAM_FEED)
-                    img(src='images/tt2.menu.buddy.png')
-                li
-                  a(href='?c=inbox', title='title')
-                    .inbox.reddot
-                      img(src='images/reddot.png')
-                li
-                  a(href='?c=pluglist')
-                    img(src='images/tt2.menu.plugin.png')
-                li.visible-phone
-                  a(href='?c=guest&a=logout', title='title')
-                    img(src='images/tt2.menu.logout.png')
-                li#doing_gif
-                  img(src='images/doing.gif')
-                  | "/
-            // /.nav-collapse
-            #top_dropdown.btn-group.pull-right.nav-collapse
-              button#top_user_name.btn.noblue(data-toggle='dropdown')
-              button#top_user_menu.btn.dropdown-toggle(data-toggle='dropdown')
-                span.caret
-              ul.dropdown-menu
-                li
-                  a(href='href') ' , '?c=dashboard&a=about' );void(0);" 
-                li
-                  a(href='javascript:check_version();void(0);', target='_blank')
-                li.divider
-                li
-                  a(href='javascript:void(0);')
-                    label.checkbox
-                      input.remember(type='checkbox', name='sound-enable', value='1')
-                li.divider
-                li
-                  a(href='href') ' , '?c=dashboard&a=profile' );void(0);"
-                li
-                  a(href='href') ' , '?c=dashboard&a=avatar' );void(0);"
-                li
-                  a(href='href') ' , '?c=dashboard&a=password' );void(0);"
-                li.divider
-                li
-                  a(href='href') ' , '?c=inbox&a=qrlogin' );void(0);"
-                li.divider
-                li
-                  a(href='?c=guest&a=logout')
+#header
+  .navbar.navbar-fixed-top
+    .navbar-inner.navbar-tt
+      .container
+        .mycontainer
+          a.brand(href='/dashboard', title=title)
+          div
+            ul#tt_menu_list.nav
+              !=partial('layout/web/tt_menu', {as:'ttMenu',collection:menulist} )
+          #top_dropdown.btn-group.pull-right.nav-collapse
+            button#top_user_name.btn.noblue(data-toggle='dropdown')
+            button#top_user_menu.btn.dropdown-toggle(data-toggle='dropdown')
+              span.caret
+            ul.dropdown-menu
+              li#user_menu_1.divider
+              li#user_menu_2.divider
+              li#user_menu_3.divider
+              li#user_menu_4.divider

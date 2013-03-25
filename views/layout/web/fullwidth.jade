@@ -5,8 +5,6 @@ html(lang='zh-cn')
     title
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-    link(rel='shortcut icon', href='href')
-    | " /
     style(type='text/css')
       body
       {
@@ -19,8 +17,7 @@ html(lang='zh-cn')
       }
     link(href='stylesheets/bootstrap-responsive.min.css', rel='stylesheet')
     link(rel='stylesheet', href='stylesheets/style.css', type='text/css')
-    link(rel='stylesheet', type='text/css', href='href', static='static', css='css')
-    | "
+    link(rel='stylesheet', type='text/css', href='stylesheets/login_screen.css', static='static', css='css')
     //if lt IE 9
       script(src='javascripts/html5.js')
     //if IE 6
@@ -31,12 +28,5 @@ html(lang='zh-cn')
     //if IE 6
       script(src='javascripts/ie6.min.js')
     script(src='javascripts/app.js')
-    script(type='text/javascript', src='src', static='static', script='script')
-    | "
   body
-    .container
-      .row-fluid
-        .span12
-        // /span
-      // /row
-    // /.fluid-container
+    != body

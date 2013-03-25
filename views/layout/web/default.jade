@@ -17,28 +17,19 @@ html(lang='zh-cn')
       }
     link(href='stylesheets/bootstrap-responsive.min.css', rel='stylesheet')
     link(rel='stylesheet', href='stylesheets/style.css', type='text/css')
-    link(rel='stylesheet', type='text/css', href='href', static='static', css='css')
-    | "
     //if lt IE 9
-      script(src='static/script/html5.js')
+      script(src='javascripts/html5.js')
     //if IE 6
       link(href='stylesheets/ie6.min.css', rel='stylesheet')
-    script(src='static/script/jquery.min.js')
-    script(src='static/script/jquery.cookie.js')
-    script(src='static/script/bootstrap.min.js')
+    script(src='javascripts/jquery.min.js')
+    script(src='javascripts/jquery.cookie.js')
+    script(src='javascripts/bootstrap.min.js')
     //if IE 6
-      script(src='static/script/ie6.min.js')
-    script(src='static/script/app.js')
-    script(type='text/javascript', src='src', static='static', script='script')
-    | "
-include header
+      script(src='javascripts/ie6.min.js')
+    script(src='javascripts/app.js')
   body
-    .container
-      .row-fluid
-        .span3
-        // /span
-        .span9
-        // /span
-      // /row
-    // /.fluid-container
+    include header
+    div!= body
+    include common
+    include footer
 

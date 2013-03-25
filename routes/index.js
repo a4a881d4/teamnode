@@ -19,25 +19,29 @@ function activeByTitle( title ) {
 	return menulist;
 }
 
+function web( str ) {
+	return 'layout/web/'+str;
+}
+
 exports.index = function(req, res){
-  res.render('dashboard', { 
+  res.render(web('main/dashboard/index'), { 
   	title: 'Express', 
   	menulist:activeByTitle('Todo'),
-  	layout:'default' 
+  	layout:web('default') 
   	});
 };
 
 exports.guest = function(req, res){
-  res.render('guest', { 
+  res.render(web('main/guest/index'), { 
   	title: 'Guest', 
-  	layout:'fullwidth' 
+  	layout:web('fullwidth') 
   	});
 };
 
 exports.buddy = function(req, res){
-  res.render('buddy', { 
+  res.render(web('main/buddy/index'), { 
   	title: 'buddy', 
   	menulist:activeByTitle('buddy'),
-  	layout:'card' 
+  	layout:web('card') 
   	});
 };

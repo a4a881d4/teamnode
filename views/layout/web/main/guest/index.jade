@@ -1,45 +1,23 @@
-html
-  body
-    .login
-      .container
-        h1
-          img(src='src')
-          | " /
-        center
-          .login-area
-            form#login_form.form-horizontal(action='?c=guest&a=login', method='post', onsubmit='send_form_in("login_form");return false;void(0);')
-              .input-prepend
-                span.add-on
-                  img(src='src')
-                  | " class="licon"/
-                input(type='text', name='email', placeholder='placeholder')
-                | " value="
-                | "
-              .line-large
-              .input-prepend
-                span.add-on
-                  img(src='src')
-                  | " class="licon"/
-                input(type='password', name='password', placeholder='placeholder')
-                | " value="
-                | "
-              .line-large
-              .line-large
-              select#tt2_lang_select(onchange='set_lang();')
-                option(value='value')
-                  | "
-              .line-large
-              .line-large
-              div
-                button.btn.btn-large.btn-inverse.login(type='submit')
-              div
-    script(type='text/javascript')
-      if( $.browser.msie )
-      {
-      $('#login_form').html('<h3 style="color:white"><?=__('NO_IE_NOTICE')?></h3>');
-      }
-      function set_lang()
-      {
-      $.cookie( 'tt2_lang' , $('#tt2_lang_select option:selected').attr('value') );
-      window.location.reload();
-      }
+.login
+  .container
+    h1
+      img(src='images/tt2.flogo.large.png')
+    center
+      .login-area
+        form#login_form.form-horizontal(action='/login', method='post', onsubmit='send_form_in("login_form");return false;void(0);')
+          .input-prepend
+            span.add-on
+              img.licon(src='images/login.mail.png')
+            input(type='text', name='email', placeholder='邮箱')
+          .line-large
+          .input-prepend
+            span.add-on
+              img.licon(src='images/login.lock.png')
+            input(type='password', name='password', placeholder='密码')
+          .line-large
+          .line-large
+          .line-large
+          .line-large
+          div
+            button.btn.btn-large.btn-inverse.login(type='submit') 登入
+          div
