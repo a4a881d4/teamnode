@@ -1,16 +1,47 @@
-var mongodb = require('./db');
+var mongodb = require('./db')
+  , crypto = require('crypto')
+  ;
 
 function User(user) {
   this.email = user.email;
   this.password = user.password;
+  this.name = user.name;
+  if( user.Uid )
+  	this.Uid = user.Uid;
+  if( user.level )
+  	this.level = user.level;
 };
 module.exports = User;
 
-User.prototype.save = function save(callback) {
-  var user = {
+User.prototype.newUid = function newUid() {
+	var md5 = crypto.createHash('md5');
+	md5.update(new Date().toString());
+	var uid = md5.update(this.email).digest('hex').toString();
+	return uid;
+};
+
+User.prototype.toObj = function toObj() {
+	var user = {
     email: this.email,
     password: this.password,
+    name: this.name
   };
+  
+  if( this.Uid )
+  	user.Uid = this.Uid;
+  else
+  	user.Uid = this.newUid();
+  	
+  if( this.level )
+  	user.level = this.level;
+  else
+  	user.level = 1;	
+  return user;
+};
+
+User.prototype.save = function save(callback) {
+	var user = this.toObj();
+	console.log("user :"+user.toString());
   mongodb.open(function(err, db) {
     if (err) {
       return callback(err);
@@ -20,7 +51,7 @@ User.prototype.save = function save(callback) {
         mongodb.close();
         return callback(err);
       }
-      collection.ensureIndex('email', {unique: true});
+      collection.ensureIndex('Uid', {unique: true});
       collection.insert(user, {safe: true}, function(err, user) {
         mongodb.close();
         callback(err, user);
@@ -29,7 +60,7 @@ User.prototype.save = function save(callback) {
   });
 };
 
-User.get = function get(email, callback) {
+User.getBy = function getBy( some, callback ) {
   mongodb.open(function(err, db) {
     if (err) {
       return callback(err);
@@ -39,7 +70,7 @@ User.get = function get(email, callback) {
         mongodb.close();
         return callback(err);
       }
-      collection.findOne({email: email}, function(err, doc) {
+      collection.findOne(some, function(err, doc) {
         mongodb.close();
         if (doc) {
           var user = new User(doc);
@@ -52,7 +83,11 @@ User.get = function get(email, callback) {
   });
 };
 
-User.del = function del(email, callback) {
+User.getByEmail = function getByEmail(email, callback) {
+	User.getBy({email:email},callback);
+};
+
+User.delBy = function del(some, callback) {
   mongodb.open(function(err, db) {
     if (err) {
       return callback(err);
@@ -62,10 +97,14 @@ User.del = function del(email, callback) {
         mongodb.close();
         return callback(err);
       }
-      collection.remove({email: email}, function(err, doc) {
+      collection.remove(some, function(err, doc) {
         mongodb.close();
         callback(err, doc);
       });
     });
   });
+};
+
+User.delByEmail = function delByEmail(email, callback) {
+	User.delBy({email:email},callback);
 };

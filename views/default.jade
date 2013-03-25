@@ -29,8 +29,7 @@ html(lang='zh-cn')
     script(src='javascripts/app.js')
   body
     include header
-    .container
-      .hero-unit
-        h2= title
-        p #{info}
+    div!= body
+    include common
     include footer
+

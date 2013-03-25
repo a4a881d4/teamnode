@@ -1,3 +1,8 @@
-li
-  a(href=ttMenu.href,title=ttMenu.title )
-    img(src=ttMenu.img)
+- if(ttMenu.active)
+  li.active
+    a(href=ttMenu.href,title=ttMenu.title )
+      img(src=ttMenu.img)
+- else
+  li
+    a(href=ttMenu.href,title=ttMenu.title )
+      img(src=ttMenu.img)
