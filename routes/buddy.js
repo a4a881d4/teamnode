@@ -38,7 +38,6 @@ exports.data = function(req,res) {
       console.log(JSON.stringify(err));
     } else {
       var fn = g.render('layout/ajax/widget/buddy');
-      console.log(JSON.stringify(u));
       var str='';
       for( k in u ) {
         str += fn({
