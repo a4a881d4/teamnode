@@ -1,12 +1,14 @@
-- if mylevel == -1
-  body
-    li.clearfix.user.overhide(pinyin=buddy.pinyin, user=buddy.user, uid=buddy.Uid )
+- if (mylevel == 9)
+    li.clearfix.user.overhide( pinyin=buddy.pinyin, user=buddy.name, uid=buddy.Uid )
       a.close.pull-right.hide(href='javascript:admin_close_user(buddy.Uid);') ×
-      img.avatar.pull-left.hidden-phone(src=avatar(buddy.avatar_small))
+      - if(buddy.avatar_small)
+        img.avatar.pull-left.hidden-phone(src=buddy.avatar_small)
+      - else
+        img.avatar.pull-left.hidden-phone(src='images/user.avatar.png')
       ul.binfo.pull-left
-        li
+        li= buddy.name
           i.icon-star
-          - if(buddy.level==-1)
+          - if(buddy.level==9)
             a.side_link(href='javascript:admin_user_off(buddy.Uid);void(0);') 降为普通用户
           - else
             a.side_link(href='javascript:admin_user_on(buddy.Uid);void(0);') 升为管理员
@@ -14,74 +16,85 @@
         - if(buddy.email)
           li
             i.icon-envelope 
-            | 邮箱 - a(href="mailto:='mailto:#{buddy.email}'",target="_blank") buddy.email
+            | &nbsp;邮箱 - 
+            a(href="mailto:='mailto:#{buddy.email}'",target="_blank")= buddy.email
         - if(buddy.mobile) 
           li
             i.icon-phone 
-            | 手机 - a(href='tel:+86#{buddy.mobile}', target="_blank" ) buddy.mobile
+            | 手机 - 
+            a(href='tel:+86#{buddy.mobile}', target="_blank" )= buddy.mobile
         - if(buddy.tel)
           li
             i.icon-phone
-            | 分机 - a(href='tel:+86#{buddy.tel}', target="_blank" ) buddy.tel
+            | 分机 - 
+            a(href='tel:+86#{buddy.tel}', target="_blank" )= buddy.tel
         - if(buddy.eid)
           li
             i.icon-credit-card
-            | 工号 - a(href='##{buddy.eid}' ) buddy.eid
+            | 工号 - 
+            a(href='##{buddy.eid}' )= buddy.eid
         - if(buddy.weibo)
           li
             i.icon-twitter
-            | 微博 - a(href='http://s.weibo.com/user/#{buddy.weibo}', target="_blank" ) @buddy.weibo
+            | 微博 - 
+            a(href='http://s.weibo.com/user/#{buddy.weibo}', target="_blank" ) @=buddy.weibo
         - if(buddy.desp)
           li
             i.icon-asterisk
-            | 备注 - nl2br(buddy.desp)
+            | 备注 - 
+            nl2br(buddy.desp)
         - if(buddy.groups)
-          li#t-tags-#{buddy.Uid}
+          li(id='t-tags-#{buddy.Uid}')
             i.icon-tags
             - buddy.groups.forEach( function(item){
                 span.label.label-info(item)
             - })
-        li#t-tags-edit-#{buddy.Uid}(style="display:none")
+        li(id='t-tags-edit-#{buddy.Uid}',style="display:none")
           div
-            - var gv = join(',',buddy.groups);
-            input#t-tags-input-#{buddy.Uid}(value=gv)
+            - var gv = buddy.group;
+            input(id='t-tags-input-#{buddy.Uid}',value=gv)
             br
             a.btn.btn-primary(href='javascript:save_tag(#{buddy.Uid});void(0);') 保存
             a.btn(href='javascript:cancel_tag(#{buddy.Uid});void(0);') 取消
         li
-          a.side_link#t-tags-link-#{buddy.Uid}(href='javascript:edit_tag(#{buddy.Uid});void(0);') 编辑用户所属分组
+          a.side_link(id='t-tags-link-#{buddy.Uid}',href='javascript:edit_tag(#{buddy.Uid});void(0);') 编辑用户所属分组
         li  
 - else
-  body
     li.clearfix.user.overhide(pinyin=buddy.pinyin, user=buddy.user, uid=buddy.Uid )
-      img.avatar.pull-left.hidden-phone(src=avatar(buddy.avatar_small))
+      img.avatar.pull-left.hidden-phone(src=buddy.avatar_small)
       ul.binfo.pull-left
         - if(buddy.email)
           li
             i.icon-envelope 
-            | 邮箱 - a(href="mailto:='mailto:#{buddy.email}'",target="_blank") buddy.email
+            | 邮箱 - 
+            a(href="mailto:='mailto:#{buddy.email}'",target="_blank")= buddy.email
         - if(buddy.mobile) 
           li
             i.icon-phone 
-            | 手机 - a(href='tel:+86#{buddy.mobile}', target="_blank" ) buddy.mobile
+            | 手机 - 
+            a(href='tel:+86#{buddy.mobile}', target="_blank" )= buddy.mobile
         - if(buddy.tel)
           li
             i.icon-phone
-            | 分机 - a(href='tel:+86#{buddy.tel}', target="_blank" ) buddy.tel
+            | 分机 - 
+            a(href='tel:+86#{buddy.tel}', target="_blank" )= buddy.tel
         - if(buddy.eid)
           li
             i.icon-credit-card
-            | 工号 - a(href='##{buddy.eid}' ) buddy.eid
+            | 工号 - 
+            a(href='##{buddy.eid}' )= buddy.eid
         - if(buddy.weibo)
           li
             i.icon-twitter
-            | 微博 - a(href='http://s.weibo.com/user/#{buddy.weibo}', target="_blank" ) @buddy.weibo
+            | 微博 - 
+            a(href='http://s.weibo.com/user/#{buddy.weibo}', target="_blank" ) @=buddy.weibo
         - if(buddy.desp)
           li
             i.icon-asterisk
-            | 备注 - nl2br(buddy.desp)
+            | 备注 - 
+            nl2br(buddy.desp)
         - if(buddy.groups)
-          li#t-tags-#{buddy.Uid}
+          li(id='t-tags-#{buddy.Uid}')
             i.icon-tags
             - buddy.groups.forEach( function(item){
                 span.label.label-info(item)

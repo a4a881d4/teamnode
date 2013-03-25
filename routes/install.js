@@ -12,7 +12,7 @@ exports.reset = function(req, res){
     email: 'a4a4881d4@163.com',
     password: md5.update(passwd).digest('base64'),
     name:'admin',
-    level:-1
+    level:9
   });
   User.getByEmail(admin.email, function(err, user) {
     myinfo="";

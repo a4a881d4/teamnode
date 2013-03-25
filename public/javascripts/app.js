@@ -141,7 +141,7 @@ function load_user_tooltips( origin , continueTooltip )
 
 function load_buddy()
 {
-	var url = '?c=buddy&a=data' ;
+	var url = '/buddy/data' ;
 	var params = { };
 	$.post( url , params , function( data )
 	{

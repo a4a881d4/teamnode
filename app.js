@@ -4,14 +4,12 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , install = require('./routes/install')
   , http = require('http')
   , partials = require('express-partials')
   , cons = require('consolidate')
   , MongoStore = require('connect-mongo')(express)
   , settings = require('./Settings')
+  , listm = require('./libs/listm')
   , path = require('path');
 
 var app = express();
@@ -41,12 +39,42 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/install', install.reset);
-app.get('/guest',routes.guest);
-app.get('/buddy',routes.buddy);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+var modules={};
+listm.list( __dirname + '/routes',function( err, m ) {
+  if(err) {
+    console.log(" get modules error");
+  } else {
+    modules = m;
+    app.get('/', m['dashboard']['index']);
+    app.get('/install', m['install']['reset']);
+    app.get('/:controller',function( req, res, next ) {
+      var c = req.params['controller'];
+      var a = 'index';
+      if( m[c] && m[c][a] ) {
+        var f = m[c][a];
+        f( req, res, next );
+      }
+      else
+        next();
+    });
+    app.post('/:controller/:action',function( req, res, next ) {
+      var c = req.params['controller'];
+      var a = req.params['action'];
+      if( m[c] && m[c][a] ) {
+        var f = m[c][a];
+        f( req, res, next );
+      }
+      else {
+        console.log('unmatch :'+c+'/'+a);
+        next();
+      }
+    });
+    http.createServer(app).listen(app.get('port'), function(){
+      console.log("Express server listening on port " + app.get('port'));
+    });
+  }
 });
+
+
+
