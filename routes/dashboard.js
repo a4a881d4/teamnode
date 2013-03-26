@@ -33,9 +33,9 @@ exports.getprofile = function(req,res) {
 exports.postupdate_profile = function(req,res) {
 	var needs = ['mobile','tel','eid','weibo','desp','email'];
 	for( k in needs ) {
-		session.user[needs[k]] = req.body[needs[k]];
+		req.session.user[needs[k]] = req.body[needs[k]];
 	}
-	var newU = new User(session.user);
+	var newU = new User(req.session.user);
 	newU.update( function( err, user ) {
 	  if( err ) {
 	    res.json({err_code:1,message:"unknow"});
