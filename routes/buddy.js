@@ -21,15 +21,15 @@ exports.postaddOne = function(req,res) {
   user.email=req.body.email;
   user.password=req.body.password;
   User.sign_up(user,req.session,function(err,u) {
-    if( err ) {
+    if( err.err_code!=0 ) {
       console.log(JSON.stringify(err));
-      res.json({err_code:g.errorCode['LR_API_FORBIDDEN'],message:err});
+      res.json(err);
     } else {
       var fn = g.render('layout/ajax/widget/buddy');
       console.log(JSON.stringify(u));
       res.json({err_code:0, data:{html:fn({
           mylevel:9,
-          buddy:u
+          buddy:u[0]
         })}
       });
     }

@@ -15,7 +15,8 @@
       #side_container
         h2.side_board
           | 搜索成员
-          a.side_link(href='javascript:$("#buddy_add_box").slideToggle();void(0);') 添加
+          - if( user.level==9 )
+            a.side_link(href='javascript:$("#buddy_add_box").slideToggle();void(0);') 添加
         .input-append
           input#buddy_key(type='text', placeholder='输入姓名或拼音', autofocus='autofocus')
           span.add-on 搜索

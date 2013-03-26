@@ -71,12 +71,12 @@ User.prototype.save = function save(callback) {
     db.collection('users', function(err, collection) {
       if (err) {
         mongodb.close();
-        return callback(err);
+        return callback({code:10009,message:'open db error'},null);
       }
       collection.ensureIndex('Uid', {unique: true});
       collection.insert(user, {safe: true}, function(err, user) {
         mongodb.close();
-        callback(err, user);
+        return callback({code:0,message:'200'}, user);
       });
     });
   });
@@ -196,21 +196,39 @@ User.sign_up = function sign_up( user, session, cb ) {
         user.password = md5.update(user.password).digest('base64');
         var nUser = new User(user);
         nUser.save(function(err,retuser) {
-          if( err ) {
+          if( err.code!=0 ) {
             errstr += 'add user error'+err;
+            return cb({err_code:20011,massage:'error :'+errstr},null);
           } else {
-            cb(null,retuser);
-            return;
+            cb(err,retuser);
           }
         });
       } else {
         errstr+='user is exist';
+        return cb({err_code:20010,massage:'error :'+errstr},null);
       }
     });
   } else {
     errstr += 'not admin';
+    return  cb({err_code:20009,massage:'error :'+errstr},null);
   }
-  cb('error :'+errstr,null);
 };
 
+User.prototype.update = function save(callback) {
+  var user = this.toObj();
+  mongodb.open(function(err, db) {
+    if (err) {
+      return callback(err);
+    }
+    db.collection('users', function(err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+      collection.update( {Uid:user.Uid}, user )
+      mongodb.close();
+      callback(null, user);
+    });
+  });
+};
 
