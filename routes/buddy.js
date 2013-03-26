@@ -8,11 +8,13 @@ exports.index = function(req, res){
   res.render(g.web('main/buddy/index'), { 
   	title: 'buddy', 
   	menulist:g.activeByTitle('buddy'),
-  	layout:g.web('card') 
+  	layout:g.web('card'),
+  	user:req.session.user,
+  	lang:g.lang  
   	});
 };
 
-exports.add = function(req,res) {
+exports.postaddOne = function(req,res) {
   var user={};
   user.name=req.body.name;
   user.name.replace(/ /g,'');
@@ -21,19 +23,20 @@ exports.add = function(req,res) {
   User.sign_up(user,req.session,function(err,u) {
     if( err ) {
       console.log(JSON.stringify(err));
+      res.json({err_code:g.errorCode['LR_API_FORBIDDEN'],message:err});
     } else {
       var fn = g.render('layout/ajax/widget/buddy');
       console.log(JSON.stringify(u));
       res.json({err_code:0, data:{html:fn({
           mylevel:9,
-          buddy:u[0]
+          buddy:u
         })}
       });
     }
   });
 };
 
-exports.data = function(req,res) {
+exports.postdata = function(req,res) {
   User.get(function(err,u) {
     if( err ) {
       console.log(JSON.stringify(err));

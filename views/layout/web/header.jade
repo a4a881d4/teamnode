@@ -8,11 +8,25 @@
             ul#tt_menu_list.nav
               !=partial('layout/web/tt_menu', {as:'ttMenu',collection:menulist} )
           #top_dropdown.btn-group.pull-right.nav-collapse
-            button#top_user_name.btn.noblue(data-toggle='dropdown')
-            button#top_user_menu.btn.dropdown-toggle(data-toggle='dropdown')
-              span.caret
-            ul.dropdown-menu
-              li#user_menu_1.divider
-              li#user_menu_2.divider
-              li#user_menu_3.divider
-              li#user_menu_4.divider
+            - if( user )
+              button#top_user_name.btn.noblue(data-toggle='dropdown')= user.name 
+              button#top_user_menu.btn.dropdown-toggle(data-toggle='dropdown')
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href="javascript:show_float_box( '#{lang['TEAMTOY_ABOUT']}' , '/dashboard/about' );void(0);")= lang['TEAMTOY_ABOUT']
+                li.divider
+                li
+                  a(href='javascript:void(0);')
+                    label.checkbox= lang['MESSAGE_SOUND']
+                      input.remember(type='checkbox', name='sound-enable', value='1')
+                li.divider
+                li
+                  a(href="javascript:show_float_box( '#{lang['UPDATE_PROFILE']}' , '/dashboard/profile' );void(0);")= lang['UPDATE_PROFILE'] 
+                li
+                  a(href="javascript:show_float_box( '#{lang['UPDATE_AVATAR']}' , '/dashboard/avatar' );void(0);")= lang['UPDATE_AVATAR'] 
+                li
+                  a(href="javascript:show_float_box( '#{lang['UPDATE_PASSWORD']}' , '/dashboard/password' );void(0);")= lang['UPDATE_PASSWORD'] 
+                li.divider
+                li
+                  a(href='/guest/logout')= lang['LOGOUT']

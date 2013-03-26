@@ -7,6 +7,8 @@ var menulist=[ {href:'/dashboard',title:'Todo',img:'images/tt2.menu.todo.png'}
              , {href:'/feed',title:'feed',img:'images/tt2.menu.feed.png'}
              , {href:'/buddy',title:'buddy',img:'images/tt2.menu.buddy.png', level:9 }
              ];
+var language = 'zh_cn';
+var lang = require(__dirname+'/local/'+language);
 
 var errorCode = {
     LR_API_TOKEN_ERROR:10001
@@ -35,6 +37,9 @@ var activeByTitle = function activeByTitle( title ) {
 var web = function web( str ) {
     return 'layout/web/'+str;
   };
+var ajax = function ajax(str) {
+    return 'layout/ajax/'+str;
+  };
 var is_email = function is_email( str ) {
     if( str )
       return true;
@@ -58,8 +63,10 @@ module.exports = {
   host: 'localhost',
   activeByTitle:activeByTitle,
   web:web,
+  ajax:ajax,
   errorCode:errorCode,
   is_email:is_email,
   render:render,
-  jsforword:jsforword
+  jsforword:jsforword,
+  lang:lang
 };

@@ -10,7 +10,7 @@ exports.index = function(req, res){
   	});
 };
 
-exports.login = function(req,res) {
+exports.postlogin = function(req,res) {
   var email = req.body.email;
   var password = req.body.password;
   User.getByEmail(email,function( err, user ) {
@@ -29,4 +29,9 @@ exports.login = function(req,res) {
   });
 };
  
+exports.getlogout = function(req, res){
+  if( req.session.user )
+    req.session.user=null;
+  res.redirect('/guest');
+};
         

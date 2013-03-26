@@ -1,48 +1,41 @@
 html
   body
-    form#profile_form(action='?c=dashboard&a=update_profile')
+    form#profile_form(action='/dashboard/update_profile')
       .input-prepend.full
         span.add-on
           i.icon-user
-        input(type='text', name='name', placeholder='placeholder')
-        | " value="
-        | " readOnly="true"
+          | #{lang['NAME']}
+        input(type='text', name='name', placeholder='#{lang["NAME_INPUT_EXPLAIN"]}',value='#{user["name"]}',readOnly="true")
       .input-prepend.full
         span.add-on
           i.icon-envelope
-        input(type='text', name='email', placeholder='placeholder')
-        | " value="
-        | "
+          | #{lang['EMAIL']}
+        input(type='text', name='email', placeholder='#{lang["EMAIL_INPUT_EXPLAIN"]}',value='#{user["email"]}')
       .input-prepend.full
         span.add-on
           i.icon-phone
-        input(type='text', name='mobile', placeholder='placeholder')
-        | " value="
-        | "
+          | #{lang['MOBILE']}
+        input(type='text', name='mobile', placeholder='#{lang["MOBILE_INPUT_EXPLAIN"]}',value='#{user["mobile"]}')
       .input-prepend.full
-        span.add-on
+        span.add-on 
           i.icon-phone
-        input(type='text', name='tel', placeholder='placeholder')
-        | " value="
-        | "
+          | #{lang['TEL']}
+        input(type='text', name='tel', placeholder='#{lang["TEL_INPUT_EXPLAIN"]}',value='#{user["mobile"]}')
       .input-prepend.full
         span.add-on
           i.icon-credit-card
-        input(type='text', name='eid', placeholder='placeholder')
-        | " value="
-        | "
+          | #{lang['EMPLOYEE_ID']}
+        input(type='text', name='eid', placeholder='#{lang["EMPLOYEE_ID_INPUT_EXPLAIN"]}',value='#{user["eid"]}')
       .input-prepend.full
-        span.add-on
+        span.add-on 
           i.icon-twitter
-        input(type='text', name='weibo', placeholder='placeholder')
-        | " value="
-        | "
+          | #{lang['WEIBO_ID']}
+        input(type='text', name='weibo', placeholder='#{lang["WEIBO_ID_INPUT_EXPLAIN"]}',value='#{user["weibo"]}')
       .input-prepend.full
         span.add-on
           i.icon-asterisk
-        input(type='text', name='desp', placeholder='placeholder')
-        | " value="
-        | "
+          | #{lang['DESP_TEXT']}
+        input(type='text', name='desp', placeholder='#{lang["DESP_TEXT_INPUT_EXPLAIN"]}',value='#{user["desp"]}')
       .line
       div
-        button.btn(type='button', onclick='send_form( "profile_form" , function(data){ profile_updated( data ); } )')
+        button.btn(type='button', onclick='send_form( "profile_form" , function(data){ profile_updated( data ); } )')= lang['UPDATE']

@@ -846,7 +846,7 @@ function show_todo_detail( tid )
 
 function check_online()
 {
-	var url = '?c=dashboard&a=user_online' ;
+	var url = '/dashboard/user_online' ;
 	
 	var params = {};
 	$.post( url , params , function( data )
@@ -881,7 +881,7 @@ function check_online()
 
 function check_notice()
 {
-	var url = '?c=dashboard&a=user_unread' ;
+	var url = '/dashboard/user_unread' ;
 	
 	var params = {};
 	$.post( url , params , function( data )

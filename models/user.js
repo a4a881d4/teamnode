@@ -27,6 +27,8 @@ function User(user) {
     var record = needRecorded[k];
     if( user[record] )
       this[record] = user[record];
+    else
+      this[record] = '';
   }
 };
 
@@ -45,6 +47,8 @@ User.prototype.toObj = function toObj() {
     var record = needRecorded[k];
     if( this[record] )
       user[record] = this[record];
+    else
+      user[record] = '';
   }
 
   if( this.Uid )
@@ -184,6 +188,7 @@ User.sign_up = function sign_up( user, session, cb ) {
     cb({ code:g.errorCode.LR_API_ARGS_ERROR , msg:'INPUT_CHECK_BAD_ARGS,PASSWORD'},null );
     return;
   }
+  var errstr ='';
   if( session.user.level==9 ) {
     User.getByEmail(user.email,function( err, olduser ) {
       if(!olduser) {
@@ -192,16 +197,20 @@ User.sign_up = function sign_up( user, session, cb ) {
         var nUser = new User(user);
         nUser.save(function(err,retuser) {
           if( err ) {
-            console.log('add user error'+err);
+            errstr += 'add user error'+err;
           } else {
             cb(null,retuser);
+            return;
           }
         });
       } else {
-        console.log('user is exist');
+        errstr+='user is exist';
       }
     });
+  } else {
+    errstr += 'not admin';
   }
+  cb('error :'+errstr,null);
 };
 
 

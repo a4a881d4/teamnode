@@ -40,12 +40,10 @@ app.configure('development', function(){
 });
 
 
-var modules={};
 listm.list( __dirname + '/routes',function( err, m ) {
   if(err) {
     console.log(" get modules error");
   } else {
-    modules = m;
     app.get('/', m['dashboard']['index']);
     app.get('/install', m['install']['reset']);
     app.get('/:controller',function( req, res, next ) {
@@ -60,16 +58,31 @@ listm.list( __dirname + '/routes',function( err, m ) {
     });
     app.post('/:controller/:action',function( req, res, next ) {
       var c = req.params['controller'];
-      var a = req.params['action'];
+      var a = 'post'+req.params['action'];
       if( m[c] && m[c][a] ) {
         var f = m[c][a];
+        console.log('match post:'+c+'/'+a);
         f( req, res, next );
       }
       else {
-        console.log('unmatch :'+c+'/'+a);
+        console.log('unmatch post:'+c+'/'+a);
         next();
       }
     });
+    app.get('/:controller/:action',function( req, res, next ) {
+      var c = req.params['controller'];
+      var a = 'get'+req.params['action'];
+      if( m[c] && m[c][a] ) {
+        var f = m[c][a];
+        console.log('match get:'+c+'/'+a);
+        f( req, res, next );
+      }
+      else {
+        console.log('unmatch get:'+c+'/'+a);
+        next();
+      }
+    });
+    
     http.createServer(app).listen(app.get('port'), function(){
       console.log("Express server listening on port " + app.get('port'));
     });
