@@ -19,7 +19,7 @@ exports.reset = function(req, res){
     if(user) {
       User.delByEmail(admin.email, function(err, user) {
         admin.save( function(err,user) {
-          if(err) {
+          if(err.err_code!=0) {
             myinfo ='error'+err.toString()+' '+err.password;
           } else {
             myinfo = 'replace password :'+passwd;
@@ -29,7 +29,7 @@ exports.reset = function(req, res){
       });
     } else {
       admin.save( function(err,user) {
-        if(err) {
+        if(err.err_code!=0) {
           myinfo ='error'+err.toString()+' '+err.password;
         } else {
            myinfo = 'password :'+passwd;
