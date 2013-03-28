@@ -36,6 +36,10 @@ exports.postaddOne = function(req,res) {
   });
 };
 
+exports.postgroups = function(req,res) {
+  res.json({err_code:0, data:""});
+};
+
 exports.postdata = function(req,res) {
   User.get(function(err,u) {
     if( err ) {

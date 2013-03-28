@@ -43,4 +43,15 @@ exports.postupdate_profile = function(req,res) {
 	    res.json({err_code:0,data:JSON.stringify(user)});
 	  }
 	});
-};		
+};	
+
+exports.postim_buddy_list = function(req,res) {
+	User.get( function( err, users ) {
+	  if( err ) {
+	    res.json({err_code:1,message:"unknow"});
+	  } else {
+	    res.json({err_code:0,data:JSON.stringify(users)});
+	  }
+	});
+};
+	

@@ -1524,7 +1524,7 @@ var at_users = new Array();
 
 function load_im_buddy_list()
 {
-	var url = '?c=dashboard&a=im_buddy_list' ;
+	var url = '/dashboard/im_buddy_list' ;
 	
 	var params = {};
 	$.post( url , params , function( data )
@@ -1582,7 +1582,7 @@ function load_im_buddy_list()
 			});
 
 			// add groups
-			var url = '?c=buddy&a=groups' ;
+			var url = '/buddy/groups' ;
 			$.post( url , {} , function( data2 )
 			{
 				var data_obj2 = $.parseJSON( data2 );
