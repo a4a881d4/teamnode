@@ -1,11 +1,6 @@
-html
-  body
-    li(uid='uid')
-      | " class="user_line" id="im_blist_
-      | " user="
-      | " pinyin="
-      | "
-      img(src='src')
-      | " class="avatar" title="
-      | "/
-      a
+li(uid='#{user["Uid"]}',id='im_blist_#{user["Uid"]}',user='#{user["name"]}',pinyin='#{user["pinyin"]}')
+  -if (user['avatar_small'])
+    img.avatar(src='#{user["avatar_small"]}',title='#{user["name"]}')
+  -else
+    img.avatar(src='images/user.avatar.png',title='#{user["name"]}')
+  a= user['name']
