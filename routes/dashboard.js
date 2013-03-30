@@ -89,4 +89,15 @@ exports.postuser_online = function(req,res) {
     }
   });
 };
-    
+
+exports.postuser_unread = function(req,res) {
+  var online = { Uid:req.session.user.Uid,active:Date.now() };
+  var Uid = req.session.user.Uid;
+  vkv.set('online_'+Uid,online,function(err) {
+    if(err) {
+      res.json({err_code:1,message:"redis set error"+err});
+    } else {
+      res.json({err_code:0,data:{}});
+    }
+  });
+};    

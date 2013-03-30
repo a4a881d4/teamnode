@@ -36,7 +36,13 @@ exports.getByPrefix = function getByPrefix( prefix, cb ) {
           } else {
             count++;
             if( value ) {
-              ret.push(JSON.parse(value));
+              try {
+                var obj = JSON.parse(value);
+                ret.push(obj);
+              }
+              catch(err) {
+                console.log(err);
+              }
             }
             if( count==replies.length )
               cb(null,ret);
