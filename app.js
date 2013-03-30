@@ -10,7 +10,12 @@ var express = require('express')
   , MongoStore = require('connect-mongo')(express)
   , settings = require('./Settings')
   , listm = require('./libs/listm')
-  , path = require('path');
+  , path = require('path')
+  , httpProxy = require('http-proxy')
+  , proxy = httpProxy.createServer(5984, '10.0.2.15');
+  ;
+
+
 
 var app = express();
 
@@ -28,8 +33,9 @@ app.configure(function(){
   	secret: settings.cookieSecret,
   	Store: new MongoStore( {
   		db: settings.db
-  	})
+  	}),
   }));
+  app.use('/couch',proxy);
   app.use(partials());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));

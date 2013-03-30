@@ -1604,7 +1604,7 @@ function load_im_buddy_list()
 var im_check_ref;
 
 function getCouchUrl(db) {
-  return 'http://'+$.cookie('couchhost')+':'+$.cookie('couchport')+'/'+db;
+  return '/couch'+'/'+db;
 }
 
 function show_im_box( uid )
@@ -1641,12 +1641,8 @@ function show_im_box( uid )
           var curl = getCouchUrl('im');
           var text = $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val();
           
-          $.getJSON( curl+'?callback=?', function(data) {
-            console.log(data);
-          });
-          $.support.cors = true;
           var params = {};
-          params.Uid = uid;
+          params.toUid = uid;
           params.text = encodeURIComponent( text );
           $.post( curl , params , function( data ) 
           {
