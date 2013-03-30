@@ -81,5 +81,6 @@ module.exports = {
   render:render,
   jsforword:jsforword,
   lang:lang,
-  redis:redisServer
+  redis:redisServer,
+  online_time:5*60*60*1000
 };

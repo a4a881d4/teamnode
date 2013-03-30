@@ -857,18 +857,14 @@ function check_online()
 		{
 			var uids = new Array();
 			if(!data_obj.data) return false;
-			for( var i = 0; i < data_obj.data.length ; i++ )
-			{
-				uids.push(parseInt(data_obj.data[i].uid));
-			}
-
-			//console.log( uids );
+			uids=data_obj.data;
+			console.log( data_obj.data );
 				
 			if( uids.length > 0 )
 			{
 				$('#im_buddy_list li').each( function()
 				{
-					if( $.inArray( parseInt($(this).attr('uid')) , uids ) == -1 )
+					if( $.inArray( $(this).attr('uid') , uids ) == -1 )
 						$(this).removeClass('online');
 					else
 						$(this).addClass('online');

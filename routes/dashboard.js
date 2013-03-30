@@ -4,6 +4,7 @@
  */
 var g = require('../Settings')
   , User = require('../models/user')
+  , vkv = require('../libs/vkv');
   ;
   
 exports.index = function(req, res){
@@ -71,4 +72,21 @@ exports.postim_buddy_box = function(req,res) {
     }
   });
 };
-  
+
+exports.postuser_online = function(req,res) {
+  vkv.getByPrefix('online_',function(err,values) {
+    var now = Date.now();
+    if( err ) {
+      res.json({err_code:1,message:"read redis error"+err});
+    } else {
+      var ret = [];
+      for( k in values ) {
+        if( values[k].active+g.online_time > now ) {
+          ret.push(values[k].Uid);
+        }
+      }
+      res.json({err_code:0,data:ret});
+    }
+  });
+};
+    
