@@ -10,6 +10,18 @@ var menulist=[ {href:'/dashboard',title:'Todo',img:'images/tt2.menu.todo.png'}
 var language = 'zh_cn';
 var lang = require(__dirname+'/local/'+language);
 
+var redisServer = {
+    port:6379
+  , host:'127.0.0.1'
+  , auth:'d09acdd3a56e39320a4d67ba0114785e'
+};
+/*
+var redisServer = {
+    port:2142
+  , host:'50.30.35.9'
+  , auth:'d09acdd3a56e39320a4d67ba0114785e'
+};
+*/
 var errorCode = {
     LR_API_TOKEN_ERROR:10001
   , LR_API_USER_ERROR:10002
@@ -68,5 +80,6 @@ module.exports = {
   is_email:is_email,
   render:render,
   jsforword:jsforword,
-  lang:lang
+  lang:lang,
+  redis:redisServer
 };

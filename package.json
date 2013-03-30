@@ -11,6 +11,8 @@
     "consolidate": "*",
     "express-partials": "*",
     "connect-mongo": "*",
-    "mongodb": "*"
+    "mongodb": "*",
+    "redis":"*",
+    "hiredis":"*"
   }
 }
