@@ -15,6 +15,12 @@ var redisServer = {
   , host:'127.0.0.1'
   , auth:'d09acdd3a56e39320a4d67ba0114785e'
 };
+
+var couchServer = {
+    port:5984
+  , host:'127.0.0.1'
+};
+
 /*
 var redisServer = {
     port:2142
@@ -82,5 +88,6 @@ module.exports = {
   jsforword:jsforword,
   lang:lang,
   redis:redisServer,
+  couch:couchServer,
   online_time:5*60*60*1000
 };

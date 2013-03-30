@@ -4,7 +4,7 @@
  */
 var g = require('../Settings')
   , User = require('../models/user')
-  , vkv = require('../libs/vkv');
+  , vkv = require('../libs/vkv')
   ;
   
 exports.index = function(req, res){
@@ -13,7 +13,7 @@ exports.index = function(req, res){
   res.render(g.web('main/dashboard/index'), { 
     title: 'Express', 
     menulist:g.activeByTitle('Todo'),
-    layout:g.web('default'), 
+    layout:g.web('card'), 
     user:req.session.user,
     lang:g.lang 
     });
@@ -100,4 +100,5 @@ exports.postuser_unread = function(req,res) {
       res.json({err_code:0,data:{}});
     }
   });
-};    
+};
+

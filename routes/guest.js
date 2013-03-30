@@ -21,6 +21,8 @@ exports.postlogin = function(req,res) {
       password = md5.update(password).digest('base64');
       if( password == user.password ) {
         req.session.user = user;
+        res.cookie('couchhost', g.couch.host);
+        res.cookie('couchport', g.couch.port );
         res.send("成功登入,转向中"+g.jsforword('/dashboard')); 
       } else {
         res.send("密码错误");
