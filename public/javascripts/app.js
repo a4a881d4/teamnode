@@ -1606,12 +1606,13 @@ function load_im_buddy_list()
 }
 
 var im_check_ref;
-
+var urlcouch='http://teamnode.iriscouch.com/im';
 function show_im_box( uid )
 {
-	var url = '?c=dashboard&a=im_buddy_box&uid=' + uid ;
+	var url = '/dashboard/im_buddy_box';
 	
 	var params = {};
+	params['uid']=uid;
 	$.post( url , params , function( data )
 	{
 		var data_obj = $.parseJSON( data );
