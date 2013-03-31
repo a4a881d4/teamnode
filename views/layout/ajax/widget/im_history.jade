@@ -1,8 +1,8 @@
-html
-  body
-    .text-right.chat-timeline
-    .my.clearfix
-      .span(title='title') "
-    .text-left.chat-timeline
-    .others.clearfix
-      .span(title='title') "
+-if (item['from_uid'] == $('#im_box_header').attr('uid') )
+  .text-right.chat-timeline= item['timeline']
+  .my.clearfix
+    .span(title='#{item["timeline"]}')= item['text']
+-else    
+  .text-right.chat-timeline= item['timeline']
+  .others.clearfix
+    .span(title='#{item["timeline"]}')= item['text']

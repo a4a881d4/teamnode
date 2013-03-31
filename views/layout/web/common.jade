@@ -1,3 +1,4 @@
+script(src='javascripts/jaderuntime.js')
 #im
   #im_header
     a#im_swith(href='javascript:void(0);') ?
@@ -7,7 +8,7 @@
     input#imkeyword(type='text', placeholder='姓名或拼音')
   ul#im_buddy_list
 #im_box
-  #im_box_header
+  #im_box_header(uid='#{user["Uid"]}')
     a#im_box_closer(href='javascript:close_im_box();void(0);') ×
   ul#im_area_list
 // float box

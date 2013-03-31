@@ -1607,6 +1607,24 @@ function getCouchUrl(db) {
   return '/couch'+'/'+db;
 }
 
+function fromMytoYour( myUid, yourUid, items, callback ) {
+  var url = '/couch/im/_design/default/_view/fromto?key=["' + myUid+'","'+yourUid+'"]' ;
+  $.get( url , function( data ) {
+    data = JSON.parse(data);
+    var count=0;
+    if( data['rows'] && data['rows'].length>0 ) {
+      data.rows.forEach( function(item) {
+        items.push(JSON.parse(item.value));
+        count++;
+        if( count==data.rows.length )
+          callback();
+      });
+    } else {
+      callback();
+    }
+  });
+}
+    
 function show_im_box( uid )
 {
   var url = '/dashboard/im_buddy_box';
@@ -1642,23 +1660,30 @@ function show_im_box( uid )
           var text = $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val();
           
           var params = {};
+          params.fromUid = $('#im_box_header').attr('uid');
           params.toUid = uid;
+          params.timeline = Date.now();
           params.text = encodeURIComponent( text );
-          $.post( curl , params , function( data ) 
-          {
-            if( data.ok  ) 
-            {
-              $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( text );
-              $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
-              $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
-              $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val('');
-              
-              // alert('send text'++'TO'+$(this).attr('uid'));
-            }
-            else
-            {
-              alert('API调用错误，请稍后再试。错误号'+ data.error );
-            }
+          $.ajax({
+              type: "POST"
+            , url: curl
+            , contentType: 'application/json'
+            , data: JSON.stringify(params)
+            }).done ( function( data ) {
+              data = JSON.parse(data);
+              if( data['ok']  ) 
+              {
+                $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(params) );
+                $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
+                $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
+                $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val('');
+                
+                // alert('send text'++'TO'+$(this).attr('uid'));
+              }
+              else
+              {
+                alert('API调用错误，请稍后再试。错误号'+ data.error );
+              }
 
             $('#im_area_list li#im_box_'+uid+' .im_form_textarea').attr('disabled',false);
           });    
@@ -1669,20 +1694,18 @@ function show_im_box( uid )
         }
 
       } );
-/*
-      var url = '?c=dashboard&a=im_history&uid=' + uid ;
-      var params = {};
-      $.post( url , params , function( data )
-      {
-        //alert(data+'~in');
-        //alert($('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane() + '~ini');
-        $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( data );
-        $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
-        $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
-
-        im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*10 );
-      });  
-*/
+      var items = [];
+      var myUid = $('#im_box_header').attr('uid');
+      fromMytoYour( uid, myUid, items, function() {
+        fromMytoYour( myUid,uid, items, function() {
+          items.forEach( function(item) {
+          $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(item) );
+          $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
+          $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
+          im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*10 );
+        });
+      });
+    });  
       //check_im( uid );
       $( '#im_blist_'+uid ).removeClass('new_message');
       blue_buddy_list();

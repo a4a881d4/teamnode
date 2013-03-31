@@ -1,0 +1,30 @@
+{
+  "_id": "_design/default",
+  "language": "javascript",
+  "views": {
+    "toUid": {
+      "map":
+        "function(doc) {
+          if (doc.toUid) {
+            emit(doc.toUid, JSON.stringify(doc));
+          }
+        }",
+    },
+   "fromUid": {
+      "map":
+        "function(doc) {
+          if (doc.fromUid) {
+            emit(doc.fromUid, JSON.stringify(doc));
+          }
+        }",
+    },
+    "fromto": {
+      "map":
+        "function(doc) {
+          if (doc.fromUid&&doc.toUid) {
+            emit([doc.fromUid,doc.toUid], JSON.stringify(doc));
+          }
+        }",
+    }
+  }
+}
