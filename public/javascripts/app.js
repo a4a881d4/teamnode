@@ -858,7 +858,6 @@ function check_online()
       var uids = new Array();
       if(!data_obj.data) return false;
       uids=data_obj.data;
-      console.log( data_obj.data );
         
       if( uids.length > 0 )
       {
@@ -1666,6 +1665,7 @@ function show_im_box( uid )
               }
 
             $('#im_area_list li#im_box_'+uid+' .im_form_textarea').attr('disabled',false);
+            done();
           });    
 
           doing();
