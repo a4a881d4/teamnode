@@ -8,15 +8,17 @@ var g = require('../Settings')
   ;
   
 exports.index = function(req, res){
-  if( !req.session.user )
-    res.redirect('guest');
-  res.render(g.web('main/dashboard/index'), { 
-    title: 'Express', 
-    menulist:g.activeByTitle('Todo'),
-    layout:g.web('card'), 
-    user:req.session.user,
-    lang:g.lang 
+  if( req.session.user ) {
+    res.render(g.web('main/dashboard/index'), { 
+      title: 'Express', 
+      menulist:g.activeByTitle('Todo'),
+      layout:g.web('card'), 
+      user:req.session.user,
+      lang:g.lang 
     });
+  } else {
+    res.redirect('guest');
+  }
 };
 
 exports.getabout = function(req,res) {

@@ -36,4 +36,11 @@ exports.getlogout = function(req, res){
     req.session.user=null;
   res.redirect('/guest');
 };
+
+exports.check_login = function(req, res, next){
+  if( !req.session.user )
+    res.redirect('/guest');
+  next();
+};
+        
         

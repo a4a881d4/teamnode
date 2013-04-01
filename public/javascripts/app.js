@@ -1603,28 +1603,9 @@ function load_im_buddy_list()
 
 var im_check_ref;
 
-function getCouchUrl(db) {
-  return '/couch'+'/'+db;
-}
 
 
-function fromMytoYour( myUid, yourUid, items, callback ) {
-  var url = '/couch/im/_design/default/_view/fromto?key=["' + myUid+'","'+yourUid+'"]' ;
-  $.get( url , function( data ) {
-    data = JSON.parse(data);
-    var count=0;
-    if( data['rows'] && data['rows'].length>0 ) {
-      data.rows.forEach( function(item) {
-        items.push(JSON.parse(item.value));
-        count++;
-        if( count==data.rows.length )
-          callback();
-      });
-    } else {
-      callback();
-    }
-  });
-}
+
 
 function im_history_render( item ) {
   return jaderender('im_history',item);
@@ -1661,7 +1642,6 @@ function show_im_box( uid )
       {
         if( e.which == 13 )
         {
-          var curl = getCouchUrl('im');
           var text = $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val();
           
           var params = {};
@@ -1669,12 +1649,7 @@ function show_im_box( uid )
           params.toUid = uid;
           params.timeline = Date.now();
           params.text = encodeURIComponent( text );
-          $.ajax({
-              type: "POST"
-            , url: curl
-            , contentType: 'application/json'
-            , data: JSON.stringify(params)
-            }).done ( function( data ) {
+          api('im_send',params,function( data ) {
               data = JSON.parse(data);
               if( data['ok']  ) 
               {
@@ -1701,18 +1676,14 @@ function show_im_box( uid )
       } );
       var items = [];
       var myUid = $('#im_box_header').attr('uid');
-      fromMytoYour( uid, myUid, items, function() {
-        fromMytoYour( myUid,uid, items, function() {
-          function sortTimeLine(a, b) {return a.timeline - b.timeline;}
-          items.sort(sortTimeLine);
+      api('im_history',{myUid:myUid,yourUid:uid}, function(items) {
           items.forEach( function(item) {
           $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(item) );
           $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
           $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
-          im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*10 );
         });
+        im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*10 );
       });
-    });  
       //check_im( uid );
       $( '#im_blist_'+uid ).removeClass('new_message');
       blue_buddy_list();

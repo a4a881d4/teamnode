@@ -2,16 +2,17 @@ var g = require('../Settings')
   , User = require('../models/user');
 
 exports.index = function(req, res){
-  if( !req.session.user )
+  if( req.session.user ) {
+    res.render(g.web('main/buddy/index'), { 
+    	title: 'buddy', 
+    	menulist:g.activeByTitle('buddy'),
+    	layout:g.web('card'),
+    	user:req.session.user,
+    	lang:g.lang  
+  	});  
+  } else {
     res.redirect('guest');
-  console.log(JSON.stringify(req.session.user));
-  res.render(g.web('main/buddy/index'), { 
-  	title: 'buddy', 
-  	menulist:g.activeByTitle('buddy'),
-  	layout:g.web('card'),
-  	user:req.session.user,
-  	lang:g.lang  
-  	});
+  }
 };
 
 exports.postaddOne = function(req,res) {
