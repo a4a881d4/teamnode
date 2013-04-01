@@ -1628,7 +1628,7 @@ function show_im_box( uid )
         $('#im_box_'+uid).replaceWith( data_obj.data.html  );
       else
         $('#im_area_list').prepend( data_obj.data.html  );
-
+      api('reset_im_box',{Uid:uid},function(){});
       namecard();
       
       $('#im_area_list li').hide();

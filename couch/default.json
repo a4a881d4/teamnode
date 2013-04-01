@@ -1,16 +1,17 @@
 {
-  "_id": "_design/default",
-  "language": "javascript",
+  "_id":"_design/default",
+  "_rev":"3-42ff8898d67861e9d08e6ce95ffbfbd4",
+  "language":"javascript",
   "views": {
-    "toUid": {
+    "toUid":{
       "map":
         "function(doc) {
-          if (doc.toUid) {
+          if(doc.toUid) {
             emit(doc.toUid, JSON.stringify(doc));
           }
         }"
     },
-   "fromUid": {
+    "fromUid":{
       "map":
         "function(doc) {
           if (doc.fromUid) {
@@ -18,11 +19,11 @@
           }
         }"
     },
-    "fromto": {
+    "fromto":{
       "map":
         "function(doc) {
-          if (doc.fromUid&&doc.toUid) {
-            emit([doc.fromUid,doc.toUid,doc.timeline], JSON.stringify(doc));
+          if (doc.fromUid&&doc.toUid&&doc.timeline) {
+            emit([doc.fromUid,doc.toUid,doc.timeline.toString()], JSON.stringify(doc));
           }
         }"
     }

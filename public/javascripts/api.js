@@ -11,6 +11,8 @@ function api( command, params, callback ) {
     __im_send( params, callback );
   if( command == 'im_history' )
     __im_history( params, callback );
+  if( command == 'reset_im_box' )
+    __reset_im_box( params, callback );
 }
 
 function __im_send(params, callback) {
@@ -25,8 +27,20 @@ function __im_send(params, callback) {
   });
 }
 
+function buildKeys( keys ) {
+  for( var k in keys ) {
+    if( keys[k]!='{}' )
+      keys[k] = '"'+keys[k]+'"';
+  }
+  return '['+keys.join(',')+']';
+};
+
 function fromMytoYour( myUid, yourUid, after, items, callback ) {
-  var url = '/couch/im/_design/default/_view/fromto?startkey=["' + myUid+'","'+yourUid+'","'+after+'"]' ;
+  var url = '/couch/im/_design/default/_view/fromto?startkey=' 
+    + buildKeys( [ myUid, yourUid, after ] ) 
+    + '&endkey='
+    + buildKeys( [ myUid, yourUid, '{}' ] )
+    ;
   $.get( url , function( data ) {
     data = JSON.parse(data);
     var count=0;
@@ -56,8 +70,22 @@ function __im_history( params, callback ) {
       function sortTimeLine(a, b) {return a.timeline - b.timeline;}
       items.sort(sortTimeLine);
       callback(items);
-      var since = items[items.length-1].timeline+1;
-      globes.im[uid]['history']=since.toString();
+      if( items.length>0 ) {
+        var since = items[items.length-1].timeline+1;
+        globes.im[uid]['history']=since.toString();
+      }
     });
   });
+};
+
+function __reset_im_box( params, callback ) {
+  var uid = params.Uid;
+  if( globes.im[uid]==undefined ) {
+    globes.im[uid]={
+      history:'0'
+    };
+  } else {
+    globes.im[uid]['history']='0';
+  }
+  callback();
 };
