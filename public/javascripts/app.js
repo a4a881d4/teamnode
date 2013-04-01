@@ -1607,6 +1607,7 @@ function getCouchUrl(db) {
   return '/couch'+'/'+db;
 }
 
+
 function fromMytoYour( myUid, yourUid, items, callback ) {
   var url = '/couch/im/_design/default/_view/fromto?key=["' + myUid+'","'+yourUid+'"]' ;
   $.get( url , function( data ) {
@@ -1623,6 +1624,10 @@ function fromMytoYour( myUid, yourUid, items, callback ) {
       callback();
     }
   });
+}
+
+function im_history_render( item ) {
+  return jaderender('im_history',item);
 }
     
 function show_im_box( uid )
@@ -1698,6 +1703,8 @@ function show_im_box( uid )
       var myUid = $('#im_box_header').attr('uid');
       fromMytoYour( uid, myUid, items, function() {
         fromMytoYour( myUid,uid, items, function() {
+          function sortTimeLine(a, b) {return a.timeline - b.timeline;}
+          items.sort(sortTimeLine);
           items.forEach( function(item) {
           $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(item) );
           $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
