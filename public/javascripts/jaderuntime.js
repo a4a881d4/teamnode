@@ -188,7 +188,7 @@ with (locals || {}) {
 var interp;
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
-if (item['from_uid'] == $('#im_box_header').attr('uid') )
+if (item['fromUid'] == $('#im_box_header').attr('uid') )
 {
 __jade.unshift({ lineno: 2, filename: __jade[0].filename });
 __jade.unshift({ lineno: 2, filename: __jade[0].filename });
