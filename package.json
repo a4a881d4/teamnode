@@ -13,6 +13,7 @@
     "connect-mongo": "*",
     "mongodb": "*",
     "redis":"*",
-    "hiredis":"*"
+    "hiredis":"*",
+    "http-proxy":"*"
   }
 }

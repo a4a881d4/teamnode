@@ -8,7 +8,7 @@
           if (doc.toUid) {
             emit(doc.toUid, JSON.stringify(doc));
           }
-        }",
+        }"
     },
    "fromUid": {
       "map":
@@ -16,7 +16,7 @@
           if (doc.fromUid) {
             emit(doc.fromUid, JSON.stringify(doc));
           }
-        }",
+        }"
     },
     "fromto": {
       "map":
@@ -24,7 +24,7 @@
           if (doc.fromUid&&doc.toUid) {
             emit([doc.fromUid,doc.toUid], JSON.stringify(doc));
           }
-        }",
+        }"
     }
   }
 }
