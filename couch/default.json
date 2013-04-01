@@ -22,7 +22,7 @@
       "map":
         "function(doc) {
           if (doc.fromUid&&doc.toUid) {
-            emit([doc.fromUid,doc.toUid], JSON.stringify(doc));
+            emit([doc.fromUid,doc.toUid,doc.timeline], JSON.stringify(doc));
           }
         }"
     }

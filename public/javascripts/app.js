@@ -1743,15 +1743,20 @@ function user_reset_password( uid , uname )
 
 function check_im( uid )
 {
-  var url = '?c=dashboard&a=get_fresh_chat&uid=' + uid ;
   var params = {};
-  $.post( url , params , function( data )
+  params.myUid = $('#im_box_header').attr('uid');
+  params.yourUid = uid;
+  api('im_history', params , function( data )
   {
     //alert(data+'~in');
     //alert($('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane() + '~ini');
-    if( data )
+    if( data.length>0 )
     {
-      $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( data );
+      var html ='';
+      for( var k in data ) {
+        html += im_history_render(data[k]);
+      }
+      $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( html );
       $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
       $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
       $.titleAlert("有新的私信啦", 

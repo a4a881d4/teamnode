@@ -12,7 +12,7 @@ var express = require('express')
   , listm = require('./libs/listm')
   , path = require('path')
   , httpProxy = require('http-proxy')
-  , proxy = httpProxy.createServer(5984, '10.0.2.15')
+  , proxy = httpProxy.createServer(5984, '127.0.0.1')
   ;
 
 
