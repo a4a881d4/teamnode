@@ -889,38 +889,26 @@ function check_notice()
       {
         if( data_obj.data.notice && parseInt(data_obj.data.notice) > 0 )
           $('div.inbox img.reddot').css( 'visibility' , 'visible' );  
-
         var old_nid = parseInt($.cookie('last_nid'));
         var nid = parseInt(data_obj.data.nid);
         if( isNaN( old_nid )  ) old_nid = 0;
-
-
         var old_mid = parseInt($.cookie('last_mid'));
         var mid = parseInt(data_obj.data.mid);
         if( isNaN( old_mid )  ) old_mid = 0;
-
         var title = 'TeamToy有';
         var content = '';
         var send = false;
-
         if( parseInt(data_obj.data.notice) > 0 )
         {
           title += data_obj.data.notice+'条未读通知';
           content += data_obj.data.text;
-
           if( old_nid < 1  ||  old_nid < nid ) send = true;
         }
-
         if( parseInt(data_obj.data.message) > 0 )
         {
           title += data_obj.data.message+'条未读私信';
           if( old_mid < 1  ||  old_mid < mid ) send = true;
         }
-
-
-        
-
-
         if( send )
         {
           $.titleAlert(title, 
@@ -930,9 +918,7 @@ function check_notice()
               duration:10000,
               interval:500 
           });  
-
           play_sound();
-
           if( window.webkitNotifications && window.webkitNotifications.checkPermission() == 0 )
           {
             var notification = window.webkitNotifications.createNotification
@@ -941,27 +927,19 @@ function check_notice()
                 title,
                 content
               );
-
               notification.onclick = function()
               {
                 window.open(site_url);
               };
-
               if( !$.browser.mozilla )
                 notification.onshow = function() { setTimeout(function() {notification.close()}, 15000)};
 
             notification.show();
           }
-
           
           if( parseInt(data_obj.data.notice) > 0 ) $.cookie('last_nid',nid);
           if( parseInt(data_obj.data.message) > 0 ) $.cookie('last_mid',mid);
         }
-
-        
-        
-        
-        
       }
       else
       {
