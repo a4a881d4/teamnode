@@ -23,6 +23,7 @@ exports.postlogin = function(req,res) {
         req.session.user = user;
         res.cookie('couchhost', g.couch.host);
         res.cookie('couchport', g.couch.port );
+        res.cookie('uid',user.Uid);
         res.send("成功登入,转向中"+g.jsforword('/dashboard')); 
       } else {
         res.send("密码错误");

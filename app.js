@@ -13,6 +13,7 @@ var express = require('express')
   , path = require('path')
   , httpProxy = require('http-proxy')
   , proxy = httpProxy.createServer(5984, '127.0.0.1')
+  , Sio = require('./models/sio')
   ;
 
 
@@ -89,7 +90,9 @@ listm.list( __dirname + '/routes',function( err, m ) {
       }
     });
     
-    http.createServer(app).listen(app.get('port'), function(){
+    var server = http.createServer(app);
+    settings.sio = new Sio(server);
+    server.listen(app.get('port'), function(){
       console.log("Express server listening on port " + app.get('port'));
     });
   }

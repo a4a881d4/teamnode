@@ -74,6 +74,9 @@ var render = function render( str ) {
 var jsforword = function jsforword( url ) {
   return '<script>location="' +url+ '"</script>';
 };
+var jscall = function jsforword( func ) {
+  return '<script>' +func+'();'+'</script>';
+};
 
 module.exports = {
   cookieSecret: 'a4a881d4@163.com',
@@ -86,8 +89,10 @@ module.exports = {
   is_email:is_email,
   render:render,
   jsforword:jsforword,
+  jscall:jscall,
   lang:lang,
   redis:redisServer,
   couch:couchServer,
-  online_time:5*60*60*1000
+  online_time:5*60*60*1000,
+  sio:null
 };

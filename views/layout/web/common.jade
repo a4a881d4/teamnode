@@ -33,10 +33,13 @@ script
   $('#to_top').fadeOut();
   }
   });
-      $('#to_top').click(function() {
-      $('body,html').animate({scrollTop:0},100);
-      });
-      });
+  sio_connect();
+  regist_socket_io($.cookie('uid'));
+  im_socket_io();
+  $('#to_top').click(function() {
+  $('body,html').animate({scrollTop:0},100);
+  });
+  });
       setTimeout( check_notice , 2000 );
       setInterval( check_notice , 100000 );
       setTimeout( check_online , 1000 );

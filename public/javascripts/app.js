@@ -1633,6 +1633,13 @@ function show_im_box( uid )
             }
             $('#im_area_list li#im_box_'+uid+' .im_form_textarea').attr('disabled',false);
             done();
+            var url = '/dashboard/send_im';
+            params = {toUid:uid};
+            $.post(url,params,function(ret) {
+              ret = JSON.parse(ret);
+              if(ret.err_code==1)
+                console.log('user offline');
+            });
           });    
           doing();
           $('#im_area_list li#im_box_'+uid+' .im_form_textarea').attr('disabled','disabled');
@@ -1652,7 +1659,11 @@ function show_im_box( uid )
             .data('jsp')
             .scrollToBottom();
         });
-        im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*10 );
+        regist_im(uid,function(msg) {
+          if( msg.fromUid && msg.fromUid==uid )
+            check_im( uid );
+        });
+        im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*120 );
       });
       $( '#im_blist_'+uid ).removeClass('new_message');
       blue_buddy_list();

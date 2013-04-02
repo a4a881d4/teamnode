@@ -1,5 +1,6 @@
 var globes = {
-    im:{}
+    im:{},
+    sio:null
   };
 
 function getCouchUrl(db) {
@@ -99,4 +100,39 @@ function __reset_im_box( params, callback ) {
     globes.im[uid]['history']='0';
   }
   callback();
+};
+
+function sio_connect() {
+  var url = 'http://'+window.location.host;
+  globes.sio = io.connect(url);
+}
+
+function regist_socket_io(uid) {
+  globes.sio.emit('register',{Uid:uid});
+};
+
+function regist_channel( channel, callback ) {
+  globes.sio.on(channel,callback);
+};
+
+function regist_im( uid, callback ) {
+  if( globes.im[uid]==undefined )
+    globes.im[uid]={
+        history:'0'
+      , sinceid:0
+      , callback:callback
+    };
+  else
+    globes.im[uid].callback=callback;
+};
+
+function im_socket_io() {
+  regist_channel('im', function(msg) {
+    var items = globels.im;
+    for( var uid in items ) {
+      if( items[uid].callback instanceof Function ) {
+        items[uid].callback(msg);
+      }
+    }
+  });
 };

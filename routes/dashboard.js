@@ -104,3 +104,12 @@ exports.postuser_unread = function(req,res) {
   });
 };
 
+exports.postsend_im = function(req,res) {
+  var toUid = req.body.toUid;
+  if( g.sio.reg[toUid]!=undefined ) {
+    g.sio.reg[toUid].send('im',{fromUid:req.session.user.Uid});
+    res.json({err_code:0,data:{}});
+  } else {
+    res.json({err_code:1,message:'not online'});
+  }
+}    

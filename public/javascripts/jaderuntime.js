@@ -274,18 +274,15 @@ function rtime( timeline )
   {
     var diff = (now - time)/1000;
     var limit = 24*60*60;
-    if ( diff >= limit) { var timeDate = new Date(time); console.log(timeDate.toLocaleDateString()); relative = timeDate.toLocaleDateString(); }
-    else if(diff < 60) 
-    {
+    if ( diff >= limit) { 
+      var timeDate = new Date(time); 
+      relative = timeDate.toLocaleDateString(); 
+    } else if(diff < 60) {
       relative = '不到一分钟';
-    }
-    else if(diff < 3600)
-    {
+    } else if(diff < 3600) {
       var minutes = Math.ceil(diff/60);
       relative = minutes.toString()+'分钟'+'前';
-    }
-    else
-    {
+    } else {
       var hours = Math.ceil(diff/3600);
       relative = hours.toString()+'小时'+'前';
     }
