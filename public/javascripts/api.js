@@ -28,7 +28,9 @@ function __im_send(params, callback) {
         , contentType: 'application/json'
         , data: JSON.stringify(params)
       }).done( function( data ) {
-        callback( data ); 
+        callback( data );
+        var since = params.timeline+1;
+        globes.im[params.toUid]['history']=since.toString();
       });
     } else {
       callback(data);

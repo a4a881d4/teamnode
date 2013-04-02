@@ -1613,7 +1613,6 @@ function im_history_render( item ) {
 function show_im_box( uid )
 {
   var url = '/dashboard/im_buddy_box';
-  
   var params = {};
   params['uid']=uid;
   $.post( url , params , function( data )
@@ -1622,23 +1621,18 @@ function show_im_box( uid )
     if( data_obj.err_code == 0 )
     {
       save_im_order( uid );
-
       if( $('#im_box_'+uid).length > 0 )
         $('#im_box_'+uid).replaceWith( data_obj.data.html  );
       else
         $('#im_area_list').prepend( data_obj.data.html  );
       api('reset_im_box',{Uid:uid},function(){});
       namecard();
-      
       $('#im_area_list li').hide();
       $('#im_area_list li#im_box_'+uid).show();
       $('#im_box').show();
-
       $('#im_area_list li#im_box_'+uid+' .im_history').jScrollPane();
       $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();    
-
-      $('#im_area_list li#im_box_'+uid+' .im_form_textarea').bind( 'keypress' , function(e)
-      {
+      $('#im_area_list li#im_box_'+uid+' .im_form_textarea').bind( 'keypress' , function(e) {
         if( e.which == 13 )
         {
           var text = $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val();
@@ -1649,59 +1643,47 @@ function show_im_box( uid )
           params.timeline = Date.now();
           params.text = encodeURIComponent( text );
           api('im_send',params,function( data ) {
-              data = JSON.parse(data);
-              if( data['ok']  ) 
-              {
-                $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(params) );
-                $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
-                $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
-                $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val('');
-                
-                // alert('send text'++'TO'+$(this).attr('uid'));
-              }
-              else
-              {
-                alert('API调用错误，请稍后再试。错误号'+ data.error );
-              }
-
+            data = JSON.parse(data);
+            if( data['ok']  ) 
+            {
+              $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(params) );
+              $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
+              $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
+              $('#im_area_list li#im_box_'+uid+' .im_form_textarea').val('');
+            } else {
+              alert('API调用错误，请稍后再试。错误号'+ data.error );
+            }
             $('#im_area_list li#im_box_'+uid+' .im_form_textarea').attr('disabled',false);
             done();
           });    
-
           doing();
           $('#im_area_list li#im_box_'+uid+' .im_form_textarea').attr('disabled','disabled');
-          
         }
-
-      } );
-      var items = [];
+      }); //bind keypress function
       var myUid = $('#im_box_header').attr('uid');
       api('im_history',{myUid:myUid,yourUid:uid}, function(items) {
-          items.forEach( function(item) {
-          $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( im_history_render(item) );
-          $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
-          $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
+        items.forEach( function(item) {
+          $('#im_area_list li#im_box_'+uid+' .im_history')
+            .data('jsp')
+            .getContentPane()
+            .append( im_history_render(item) );
+          $('#im_area_list li#im_box_'+uid+' .im_history')
+            .data('jsp')
+            .reinitialise();
+          $('#im_area_list li#im_box_'+uid+' .im_history')
+            .data('jsp')
+            .scrollToBottom();
         });
         im_check_ref = setInterval( function(){ check_im( uid ); } , 1000*10 );
       });
-      //check_im( uid );
       $( '#im_blist_'+uid ).removeClass('new_message');
       blue_buddy_list();
-
-
-      
-
     }
     else
     {
       console.log('API调用错误，请稍后再试。错误号'+data_obj.err_code + ' 错误信息 ' + data_obj.message);
     }
-  });  
-
-  //$('#im_area_list').html('<li>'+ uid +'</li>');
-  //$('#im_box').show();
-
-  //alert( uid );
+  });
 }
 
 function user_reset_password( uid , uname )
@@ -1746,19 +1728,24 @@ function check_im( uid )
   var params = {};
   params.myUid = $('#im_box_header').attr('uid');
   params.yourUid = uid;
-  api('im_history', params , function( data )
+  api('im_history', params , function( items )
   {
-    //alert(data+'~in');
-    //alert($('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane() + '~ini');
-    if( data.length>0 )
-    {
-      var html ='';
-      for( var k in data ) {
-        html += im_history_render(data[k]);
+    if( items.length>0 ) {
+      var count=0;
+      while( count<items.length ) {
+        var html = im_history_render(items[count]);
+        $('#im_area_list li#im_box_'+uid+' .im_history')
+          .data('jsp')
+          .getContentPane()
+          .append( html );
+          count++;
       }
-      $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').getContentPane().append( html );
-      $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').reinitialise();
-      $('#im_area_list li#im_box_'+uid+' .im_history').data('jsp').scrollToBottom();
+      $('#im_area_list li#im_box_'+uid+' .im_history')
+        .data('jsp')
+        .reinitialise();
+      $('#im_area_list li#im_box_'+uid+' .im_history')
+        .data('jsp')
+        .scrollToBottom();
       $.titleAlert("有新的私信啦", 
       {
           requireBlur:false,
@@ -1768,9 +1755,7 @@ function check_im( uid )
       });
       play_sound();  
     }  
-    //im_check_ref = setInterval( function( uid ){ check_im( uid ); } , 100000 );
-});  
-
+  });  
 }
 
 function close_im_box()
