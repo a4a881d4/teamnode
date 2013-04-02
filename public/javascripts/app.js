@@ -1585,6 +1585,7 @@ var im_check_ref;
 
 
 function im_history_render( item ) {
+  item.text = decodeURIComponent(item.text);
   return jaderender('im_history',item);
 }
     

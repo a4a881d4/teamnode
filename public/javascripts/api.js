@@ -128,7 +128,7 @@ function regist_im( uid, callback ) {
 
 function im_socket_io() {
   regist_channel('im', function(msg) {
-    var items = globels.im;
+    var items = globes.im;
     for( var uid in items ) {
       if( items[uid].callback instanceof Function ) {
         items[uid].callback(msg);
