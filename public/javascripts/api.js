@@ -16,14 +16,23 @@ function api( command, params, callback ) {
 }
 
 function __im_send(params, callback) {
-  var curl = getCouchUrl('im');
-  $.ajax({
-      type: "POST"
-    , url: curl
-    , contentType: 'application/json'
-    , data: JSON.stringify(params)
-  }).done( function( data ) {
-    callback( data ) 
+  var url = '/api/im_counter';
+  $.get(url,function(data) {
+    var ret = JSON.parse(data);
+    if( ret.err_code==0 ) {
+      params['sn']=ret.data;
+      var curl = getCouchUrl('im');
+      $.ajax({
+          type: "POST"
+        , url: curl
+        , contentType: 'application/json'
+        , data: JSON.stringify(params)
+      }).done( function( data ) {
+        callback( data ); 
+      });
+    } else {
+      callback(data);
+    }
   });
 }
 
